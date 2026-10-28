@@ -1,0 +1,186 @@
+---
+import Icon from './Icon.astro';
+import DealerLoginButton from './DealerLoginButton.astro';
+import Button from './Button.astro';
+import { nav, site } from '../config/site';
+import { industries } from '../config/data';
+import { url } from '../lib/url';
+import { img } from '../lib/images';
+import { Image } from 'astro:assets';
+
+type Props = { path: string; isLogin?: boolean };
+const { path, isLogin = false } = Astro.props;
+const logo = await img('cessoftware.png');
+const here = (href: string) => path.replace(/\/$/, '') === url(href).replace(/\/$/, '');
+const inSection = (prefix: string) => path.startsWith(url(prefix));
+---
+<header class="site-header" data-header>
+  <div class="bar container wide">
+    <a class="brand" href={url('')} aria-label="CES Software home">
+      <Image src={logo} alt="CES Software" width={150} loading="eager" fetchpriority="high" />
+    </a>
+
+    <nav class="primary" aria-label="Primary">
+      <ul data-nav-list>
+        <li class="has-panel">
+          <button type="button" aria-expanded="false" aria-haspopup="true" class:list={[{ active: inSection('touch') || inSection('ordering') || inSection('rewards') || inSection('intelligence') || inSection('edge') }]}>
+            Products <Icon name="chevron" size={14} />
+          </button>
+          <div class="panel mega">
+            <ul class="mega-grid">
+              {nav.products.map((p) => (
+                <li>
+                  <a href={url(p.href)} class="mega-item">
+                    <span class="mi-icon"><Icon name={p.icon} size={20} /></span>
+                    <span>
+                      <strong>{p.label}</strong>
+                      <small>{p.blurb}</small>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li class="has-panel">
+          <button type="button" aria-expanded="false" aria-haspopup="true" class:list={[{ active: inSection('industries') }]}>
+            Industries <Icon name="chevron" size={14} />
+          </button>
+          <div class="panel">
+            <ul class="cols-2">
+              {industries.map((i) => (
+                <li><a href={url(`industries/${i.slug}`)}>{i.name}</a></li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href={url('dealers')} class:list={[{ active: inSection('dealers') }]}>Dealers</a>
+        </li>
+        <li class="has-panel">
+          <button type="button" aria-expanded="false" aria-haspopup="true" class:list={[{ active: inSection('about') || inSection('contact') || inSection('news') }]}>
+            Company <Icon name="chevron" size={14} />
+          </button>
+          <div class="panel">
+            <ul>
+              {nav.company.map((c) => (
+                <li><a href={url(c.href)}>{c.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        </li>
+        <li class="pill" aria-hidden="true" data-nav-pill></li>
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <DealerLoginButton shared={!isLogin} />
+      <Button href={url('contact')} variant="primary" size="sm" arrow>Contact us</Button>
+    </div>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-open>
+      <span class="sr-only">Open menu</span>
+      <Icon name="menu" size={24} />
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
+  <div class="mm-top container">
+    <a class="brand" href={url('')} aria-label="CES Software home">
+      <Image src={logo} alt="CES Software" width={130} />
+    </a>
+    <button class="menu-btn" type="button" data-menu-close><span class="sr-only">Close menu</span><Icon name="close" size={24} /></button>
+  </div>
+  <nav class="mm-nav container" aria-label="Mobile">
+    <p class="mm-label">Products</p>
+    <ul>
+      {nav.products.map((p) => (<li data-mm-item><a href={url(p.href)}>{p.label}</a></li>))}
+    </ul>
+    <p class="mm-label">Industries</p>
+    <ul class="mm-small">
+      {industries.map((i) => (<li data-mm-item><a href={url(`industries/${i.slug}`)}>{i.name}</a></li>))}
+    </ul>
+    <p class="mm-label">Company</p>
+    <ul class="mm-small">
+      <li data-mm-item><a href={url('dealers')}>Dealers</a></li>
+      {nav.company.map((c) => (<li data-mm-item><a href={url(c.href)}>{c.label}</a></li>))}
+    </ul>
+  </nav>
+  <div class="mm-bottom container">
+    <DealerLoginButton full shared={false} />
+    <a class="btn primary" style="--h:52px" href={site.phoneHref}><Icon name="phone" size={17} /> {site.phone}</a>
+  </div>
+</div>
+
+<style>
+  .site-header {
+    position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--header-h);
+    transition: transform .45s var(--ease-out), background .3s, box-shadow .3s, backdrop-filter .3s;
+  }
+  .site-header.scrolled {
+    background: oklch(100% 0 0 / 0.78); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .site-header.hide { transform: translateY(-100%); }
+  .bar { height: 100%; display: flex; align-items: center; gap: 28px; }
+  .brand img { width: 150px; height: auto; }
+  .primary { margin-inline: auto; }
+  .primary > ul { display: flex; align-items: center; gap: 2px; position: relative; }
+  .primary > ul > li { position: relative; }
+  .primary > ul > li > a, .primary > ul > li > button {
+    display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px;
+    background: none; border: 0; cursor: pointer; font-size: 0.97rem; font-weight: 500; color: var(--ink); position: relative; z-index: 1;
+  }
+  .primary li > button :global(svg) { transition: transform .3s var(--ease-out); opacity: .6; }
+  .has-panel:hover > button :global(svg), .has-panel:focus-within > button :global(svg), .has-panel.open > button :global(svg) { transform: rotate(180deg); }
+  .active { color: var(--brand-ink) !important; }
+  .pill {
+    position: absolute; left: 0; top: 50%; height: 40px; border-radius: 999px; background: var(--paper-3);
+    transform: translate(var(--x, 0), -50%); width: var(--w, 0); opacity: 0; pointer-events: none; z-index: 0;
+    transition: transform .4s var(--ease-out), width .4s var(--ease-out), opacity .25s;
+  }
+  .pill.on { opacity: 1; }
+  .panel {
+    position: absolute; top: calc(100% + 8px); left: 50%; min-width: 230px; padding: 10px;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: var(--shadow-float);
+    opacity: 0; visibility: hidden; transform: translate(-50%, 8px) scale(0.98); transform-origin: top center;
+    transition: opacity .25s, transform .35s var(--ease-out), visibility .25s;
+  }
+  .panel::before { content: ''; position: absolute; inset: -12px 0 auto 0; height: 12px; }
+  .has-panel:hover > .panel, .has-panel:focus-within > .panel, .has-panel.open > .panel { opacity: 1; visibility: visible; transform: translate(-50%, 0) scale(1); }
+  .panel a { display: block; padding: 9px 14px; border-radius: 10px; font-size: .95rem; color: var(--ink); white-space: nowrap; }
+  .panel a:hover, .panel a:focus-visible { background: var(--paper-3); }
+  .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; min-width: 400px; }
+  .mega { min-width: 600px; }
+  .mega-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .mega .mega-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px; white-space: normal; }
+  .mi-icon { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand-ink); }
+  .mega-item strong { display: block; font-weight: 600; letter-spacing: -.01em; }
+  .mega-item small { display: block; color: var(--ink-3); font-size: .85rem; line-height: 1.4; margin-top: 2px; }
+  .actions { display: flex; gap: 10px; align-items: center; }
+  .menu-btn { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: #fff; place-items: center; cursor: pointer; color: var(--ink); }
+
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 150; background: #fff; display: flex; flex-direction: column;
+    visibility: hidden; opacity: 0; transform: translateY(-12px); transition: opacity .3s, transform .45s var(--ease-out), visibility .3s;
+  }
+  :global(html.menu-open) .mobile-menu { visibility: visible; opacity: 1; transform: none; }
+  .mm-top { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; flex: none; }
+  .mm-nav { flex: 1; overflow-y: auto; padding-block: 8px 24px; }
+  .mm-label { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); margin: 22px 0 8px; }
+  .mm-nav a { display: block; padding: 9px 0; font-size: 1.6rem; letter-spacing: -.03em; font-weight: 550; color: var(--ink); }
+  .mm-small a { font-size: 1.15rem; padding: 6px 0; font-weight: 500; }
+  .mm-bottom { flex: none; display: grid; gap: 10px; padding-block: 16px 24px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 1060px) {
+    .primary, .actions { display: none; }
+    .site-header .menu-btn { display: grid; margin-left: auto; }
+    .mobile-menu .menu-btn { display: grid; }
+  }
+  :global(html:not(.js)) .site-header .menu-btn { display: none; }
+  @media (max-width: 1060px) {
+    :global(html:not(.js)) .primary { display: block; }
+  }
+  @media (hover: none) { .has-panel:hover > .panel { opacity: 0; visibility: hidden; } .has-panel.open > .panel { opacity: 1; visibility: visible; } }
+</style>

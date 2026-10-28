@@ -1,0 +1,90 @@
+---
+import Icon from './Icon.astro';
+import { Image } from 'astro:assets';
+import { nav, site } from '../config/site';
+import { industries } from '../config/data';
+import { url } from '../lib/url';
+import { img } from '../lib/images';
+const logo = await img('cessoftware-white.png');
+const year = new Date().getFullYear();
+---
+<footer class="site-footer ink-band">
+  <div class="container wide">
+    <div class="top">
+      <div class="intro">
+        <Image src={logo} alt="CES Software" width={190} loading="lazy" />
+        <p class="blurb">{site.tagline}. EPoS software for retail and hospitality, since 1997.</p>
+        <ul class="contact">
+          <li><Icon name="phone" size={17} /><a href={site.phoneHref}>{site.phone}</a></li>
+          <li><Icon name="mail" size={17} /><a href={`mailto:${site.salesEmail}`}>{site.salesEmail}</a></li>
+          <li><Icon name="mail" size={17} /><a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a></li>
+          <li><Icon name="pin" size={17} /><span>{site.address.slice(1).join(', ')}</span></li>
+        </ul>
+      </div>
+      <nav class="cols" aria-label="Footer">
+        <div>
+          <h3>Products</h3>
+          <ul>{nav.products.map((p) => <li><a href={url(p.href)}>{p.label}</a></li>)}</ul>
+        </div>
+        <div>
+          <h3>Industries</h3>
+          <ul>{industries.map((i) => <li><a href={url(`industries/${i.slug}`)}>{i.name}</a></li>)}</ul>
+        </div>
+        <div>
+          <h3>Dealers</h3>
+          <ul>
+            <li><a href={url('dealers')}>Become a dealer</a></li>
+            <li><a href={url('dealer-login')}>Dealer Login</a></li>
+          </ul>
+          <h3 class="gap">Company</h3>
+          <ul>{nav.company.map((c) => <li><a href={url(c.href)}>{c.label}</a></li>)}</ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="wordmark" aria-hidden="true" data-footer-mark>
+      <span>ces</span><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="bottom">
+      <p>© {year} {site.legalName}. Owned by <a href={site.owner.href} target="_blank" rel="noopener noreferrer">{site.owner.name}</a>.</p>
+      <ul class="legal">
+        <li><a href={url('privacy')}>Privacy Policy</a></li>
+        <li><a href={url('terms')}>Terms of Use</a></li>
+        {site.social.map((s) => <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--ink); color: oklch(82% 0.015 262); padding-top: clamp(64px, 8vw, 110px); overflow: hidden; position: relative; }
+  .top { display: grid; grid-template-columns: 1.1fr 1.5fr; gap: clamp(40px, 6vw, 100px); }
+  .blurb { margin: 22px 0 22px; max-width: 34ch; color: oklch(78% 0.02 262); }
+  .contact { display: grid; gap: 10px; }
+  .contact li { display: flex; gap: 12px; align-items: center; color: oklch(86% 0.015 262); }
+  .contact :global(svg) { color: var(--c-orange); flex: none; }
+  .contact a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  h3 { font-family: var(--font-mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: oklch(70% 0.02 262); margin-bottom: 16px; font-weight: 500; }
+  h3.gap { margin-top: 32px; }
+  .cols li { margin-bottom: 10px; }
+  .cols a { position: relative; color: oklch(90% 0.01 262); font-size: .98rem; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s var(--ease-out); padding-bottom: 2px; }
+  .cols a:hover { background-size: 100% 1px; color: #fff; }
+  .wordmark { display: flex; align-items: flex-end; gap: clamp(8px, 1.6vw, 22px); margin-top: clamp(40px, 6vw, 80px); line-height: .78; user-select: none; padding-bottom: clamp(14px, 2vw, 28px); }
+  .wordmark span { font-size: clamp(7rem, 26vw, 24rem); font-weight: 700; letter-spacing: -.07em; color: oklch(100% 0 0 / .94); }
+  .wordmark i { width: clamp(18px, 3.6vw, 52px); height: clamp(18px, 3.6vw, 52px); border-radius: 30%; margin-bottom: .9vw; flex: none; }
+  .wordmark i:nth-of-type(1) { background: var(--c-blue); }
+  .wordmark i:nth-of-type(2) { background: var(--c-green); }
+  .wordmark i:nth-of-type(3) { background: var(--c-orange); }
+  .wordmark i:nth-of-type(4) { background: var(--c-red); }
+  .bottom { display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; padding-block: 28px 36px; border-top: 1px solid oklch(100% 0 0 / .12); font-size: .9rem; color: oklch(72% 0.02 262); position: relative; }
+  .bottom p { margin: 0; }
+  .bottom a:hover { color: #fff; }
+  .legal { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  @media (max-width: 900px) {
+    .top { grid-template-columns: 1fr; }
+    .cols { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) { .cols { grid-template-columns: 1fr; } }
+</style>

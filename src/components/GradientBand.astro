@@ -1,0 +1,20 @@
+---
+type Props = { class?: string };
+const { class: cls = '' } = Astro.props;
+---
+<div class={`gband ${cls}`} data-gradient aria-hidden="true">
+  <canvas></canvas>
+</div>
+<style>
+  .gband {
+    position: absolute; overflow: hidden; pointer-events: none;
+    background:
+      radial-gradient(60% 70% at 18% 25%, color-mix(in oklab, var(--c-blue) 65%, white) 0, transparent 70%),
+      radial-gradient(55% 65% at 82% 20%, color-mix(in oklab, var(--c-orange) 62%, white) 0, transparent 70%),
+      radial-gradient(60% 70% at 70% 90%, color-mix(in oklab, var(--c-red) 55%, white) 0, transparent 70%),
+      radial-gradient(55% 60% at 30% 85%, color-mix(in oklab, var(--c-green) 58%, white) 0, transparent 70%),
+      #fff;
+  }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease; }
+  :global(.gl-ready) canvas { opacity: 1; }
+</style>

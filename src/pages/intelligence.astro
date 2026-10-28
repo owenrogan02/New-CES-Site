@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Feature from '../components/Feature.astro';
+import Pic from '../components/Pic.astro';
+import CTABand from '../components/CTABand.astro';
+import { url } from '../lib/url';
+---
+<Base title="CES Intelligence | CES Software" progress>
+  <PageHero eyebrow="Cloud reporting & control" title="CES <span class='serif grad-text'>Intelligence</span>" lede="With access to your business’ data: from the till in your store; or from your pocket in the Bahamas. Wherever you are, take your business with you with ultimate control from any web-based device." image="ces_intelligence_hero_desktop.png" imageAlt="CES Intelligence EPoS System displayed on Hardware" imageWidth={1100}>
+    <Button href={url('contact')} variant="primary" arrow>Set up CES Intelligence</Button>
+    <Button href={url('touch')} variant="secondary">Works with CES Touch</Button>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container narrow">
+      <p class="lede" data-reveal>CES Intelligence works seamlessly with CES Touch and similarly, it has constantly evolved and adapted to become a market leader in the provision of powerful, user-friendly point of sale applications. The power of both Touch and Intelligence combined redefines how you control your EPoS within your business. Check out the benefits below and get in touch to set up CES Intelligence for your business today!</p>
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container wide">
+      <Feature eyebrow="01" title="2-Way Data Sync" paras={['2-way data synchronization between Touch and Intelligence of Groups, Departments, Suppliers, Unit of Sale, Products, Tax Rates, Condiments, Menus, Mix & Match Offers etc. Additions, changes and deletions performed on till are automatically synchronized to the cloud and subsequently synchronized to other tills, changes made on the cloud are automatically synchronized to the tills.']} image="2-way-sync.png" alt="Two-way sync between tills and the cloud" />
+      <Feature flip eyebrow="02" title="WYSIWYG Screen Designer" paras={['The WYSIWYG editor within CES Intelligence makes till screen creation accessible to all. If you are looking to update your till screen you can do it yourself without having to rely on the standalone till to make the changes. Our WYSIWYG editor is helpful for pretty much everyone with its simple to use interface. It\'s a WYN WYN situation!']} image="WYSIWYG.png" alt="WYSIWYG editor" />
+      <Feature eyebrow="03" title="Real Time Sales Data" paras={['Even when you\'re busy elsewhere, it can be important to stay in touch with your stores. CES Intelligence gives you the freedom to check figures and stock from any web based device. You could even do some administration from home and spend less time in the store!']} image="real-time-sales-data.png" alt="Real-time sales data" />
+      <Feature flip eyebrow="04" title="Multi-Site Management" paras={['If you’ve got multiple stores, you know how complicated it can be to maintain control of products, pricing and promotions across your whole estate. CES Intelligence gives you central access to all your tills in all your stores and makes managing products, prices and promotions across all your shops easier and more efficient.', 'If you own multiple stores, CES Intelligence can save you time and money with control over all your stores to quickly manipulate: stock control supporting Deliveries, Transfers, Adjustments, Stock Counts, controls to allow for price changes and programming changes in different shops/regions.']} image="multi-site-management.png" alt="Multi-site management" />
+      <Feature eyebrow="05" title="CES Intelligence App for Android & IOS" paras={['CES Intelligence is also available as an App for Android & IOS! Take your store data with you everywhere you go! With quick access to sales monitoring, maintenance & stock control, cloud label printing functionality and many more features you are never too far from having total control of your store.']} image="ces-app.png" alt="CES Intelligence app for Android and iOS" />
+    </div>
+  </section>
+
+  <CTABand title="Take your business <span class='serif'>with you</span>." />
+</Base>

@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+import GradientBand from '../components/GradientBand.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Pic from '../components/Pic.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Marquee from '../components/Marquee.astro';
+import Story from '../components/Story.astro';
+import YouTube from '../components/YouTube.astro';
+import { clients, industries, modules, partners } from '../config/data';
+import { site } from '../config/site';
+import { url } from '../lib/url';
+
+const products = [
+  { cls: 'touch', icon: 'touch', name: 'CES Touch', title: 'Bespoke EPoS software', body: 'The wide range of modules that can be plugged into the software redefines the meaning of bespoke. Designed and tailored to you and your business, exactly how you want it.', img: '3tills.jpg', alt: 'CES Touch EPoS system on tills and tablets', href: 'touch' },
+  { cls: 'ordering', icon: 'ordering', name: 'CES Ordering', title: 'OrderSoft & QR ordering', body: 'Guest QR ordering and staff handheld ordering, with integrated payments, built to streamline your hospitality service.', img: 'ordersoft-ScanQR.png', alt: 'Guest scanning a QR code to order', href: 'ordering' },
+  { cls: 'rewards', icon: 'rewards', name: 'CES Rewards', title: 'Turn every visit into a reason to come back', body: 'Run a bespoke loyalty app or an out-of-the-box customer rewards scheme, built to operate alongside CES Touch.', img: 'complete-loyalty-management.png', alt: 'CES Rewards loyalty management', href: 'rewards' },
+  { cls: 'intel', icon: 'intelligence', name: 'CES Intelligence', title: 'Take your business with you', body: 'Wherever you are, control your business from any web-based device, with 2-way data sync and multi-site management.', img: 'ces-app.png', alt: 'CES Intelligence app on tablet and phone', href: 'intelligence' },
+  { cls: 'edge', icon: 'edge', name: 'CES Edge', title: 'Empowering your business with smarter payments', body: 'A powerful POS system right in your hand, completely FREE. Just pay for your Clover terminal and payment processing.', img: 'environmental-flex-pocket.png', alt: 'Taking a card payment on a Clover device', href: 'edge' },
+];
+const stats = [
+  { n: 1997, label: 'CES Touch first released' },
+  { n: industries.length, label: 'Industries served' },
+  { n: modules.length, label: 'Modules to plug in' },
+  { n: partners.length, label: 'Integration partners' },
+];
+---
+<Base title="EPoS Software | Simple Point of Sale Systems | CES Software">
+  <!-- HERO -->
+  <section class="hero" data-hero>
+    <GradientBand class="hband" />
+    <div class="container wide hero-in">
+      <div class="copy">
+        <p class="eyebrow" data-reveal="fade">Market Leaders in Business EPoS Software</p>
+        <h1 class="display" data-split="now" data-split-delay="0.1">The ultimate EPoS software for <span class="serif grad-text">any industry</span></h1>
+        <p class="lede" data-reveal>Touch has allowed us to build a worldwide customer base covering a wide range of industries within the retail and hospitality sector.</p>
+        <div class="btn-row" data-reveal>
+          <Button href={url('touch')} variant="primary" arrow>Explore CES Touch</Button>
+          <Button href={url('contact')} variant="secondary">Contact us</Button>
+        </div>
+      </div>
+      <div class="visual" data-hero-visual>
+        <div class="dev" data-device>
+          <Pic src="ces_ordersoft_hero_desktop.png" alt="CES till software on a desktop till, a tablet and a handheld" width={1000} priority sizes="(max-width: 900px) 100vw, 700px" />
+        </div>
+        <div class="chip c1" data-depth="1.4"><div class="chip-in"><Icon name="sparkle" size={18} /> Launched in 1997</div></div>
+        <div class="chip c2" data-depth="-1.1"><div class="chip-in"><Icon name="globe" size={18} /> Worldwide customer base</div></div>
+        <div class="chip c3" data-depth="0.8"><div class="chip-in"><Icon name="users" size={18} /> Network of dealers</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section class="section tight clients" aria-labelledby="clients-h">
+    <div class="container wide">
+      <h2 id="clients-h" class="mini" data-reveal="fade">Some of Our Satisfied End User Clients</h2>
+    </div>
+    <Marquee items={clients} label="Satisfied end user clients" height={60} />
+  </section>
+
+  <!-- INTRO -->
+  <section class="section intro">
+    <div class="container wide split">
+      <div>
+        <p class="eyebrow" data-reveal="fade">Since 1997</p>
+        <h2 data-split>Market Leaders in Business <span class="serif">EPoS</span> Software</h2>
+      </div>
+      <div class="cols">
+        <p data-reveal>CES Software Limited, based in London, launched its ground-breaking EPoS software CES Touch, in 1997. After its initial launch it has since grown to become a market leader in the provision of powerful, user-friendly point of sale applications. Touch has allowed us to build a worldwide customer base covering a wide range of industries within the retail and hospitality sector.</p>
+        <p data-reveal>CES continually works with their customers and dealers to ensure they have the necessary support required to consistently gain the best from their EPoS systems. Our software solutions offer complete control over your business, from accounting and inventory management, through to the final sale. This has established CES as the go-to company for EPoS systems with options to link to merchant services and Cloud based services. CES prides itself by staying at the forefront of technology, and continually invests to exceed expectations amongst its peers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section alt products" id="products">
+    <div class="container wide">
+      <SectionHead eyebrow="The CES family" title="One company. <span class='serif'>Every</span> part of your till." lede="CES Touch sits at the heart, with ordering, loyalty, cloud reporting and payments built to work alongside it." />
+      <div class="bento">
+        {products.map((p) => (
+          <a href={url(p.href)} class={`card spot lift tile ${p.cls}`} data-reveal>
+            <div class="txt">
+              <span class="tag"><Icon name={p.icon} size={16} /> {p.name}</span>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+              <span class="link-arrow">Explore <Icon name="arrow" size={16} /></span>
+            </div>
+            <div class="media"><Pic src={p.img} alt={p.alt} width={p.cls === 'touch' ? 1100 : 534} sizes={p.cls === 'touch' ? '(max-width: 900px) 100vw, 700px' : '(max-width: 900px) 100vw, 420px'} /></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE STORY -->
+  <section class="section story-sec" aria-labelledby="story-h">
+    <div class="container wide">
+      <SectionHead eyebrow="CES Touch · Key features" title="An advanced <span class='serif'>all-in-one</span> EPoS, built for any industry." lede="Touch can adapt to any environment it is put into. Scroll through what makes it the most viable solution for any business." />
+      <Story />
+      <div class="more"><Button href={url('touch')} variant="secondary" arrow>See everything in CES Touch</Button></div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="section alt industries">
+    <div class="container wide">
+      <div class="head-row">
+        <SectionHead eyebrow="Your industry" title="Software that fits <span class='serif'>how you trade</span>." />
+        <div class="arrows" aria-hidden="false">
+          <button type="button" class="ar" data-rail-prev aria-label="Previous industries"><Icon name="arrow" class="flip" size={20} /></button>
+          <button type="button" class="ar" data-rail-next aria-label="Next industries"><Icon name="arrow" size={20} /></button>
+        </div>
+      </div>
+    </div>
+    <div class="rail" data-rail>
+      <div class="viewport" data-rail-viewport>
+        <ul class="track" data-rail-track>
+          {industries.map((i) => (
+            <li>
+              <a href={url(`industries/${i.slug}`)} class="card lift ind">
+                <Pic src={i.photo} alt="" width={500} sizes="320px" />
+                <div class="cap"><h3>{i.name}</h3><span class="go"><Icon name="arrow-up-right" size={18} /></span></div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDERSOFT VIDEO -->
+  <section class="section video">
+    <div class="container wide vgrid">
+      <div class="vtext">
+        <p class="eyebrow" data-reveal="fade">Introducing OrderSoft</p>
+        <h2 data-split>Looking to <span class="serif">streamline</span> service?</h2>
+        <p class="lede" data-reveal>Transform how your venue takes orders and handles transactions with two solutions developed in-house to work in complete harmony with CES Touch.</p>
+        <div class="btn-row" data-reveal><Button href={url('ordering')} variant="primary" arrow>Discover CES Ordering</Button></div>
+      </div>
+      <div data-reveal="scale">
+        <YouTube id="P1Jx5ZJbiKw" title="Looking to Streamline Service - Introducing Ordersoft" poster="ces_ordersoft_hero_desktop.png" posterAlt="OrderSoft on a till, tablet and handheld" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / STATS (ink band) -->
+  <section class="section ink stats">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container wide">
+      <div class="split2">
+        <div>
+          <p class="eyebrow" data-reveal="fade">Our EPoS software</p>
+          <h2 data-split>Designed and tailored to <span class="serif">you</span>.</h2>
+        </div>
+        <p class="body" data-reveal>CES have developed till software for a vast number of specialist businesses. EPoS software for hospitality includes: fast food, fine dining, hotels, leisure centres, pizza chains, pubs and clubs. EPoS software for retail includes: general retailers, charity shops, convenience stores, dry cleaners, off licences, and pharmacies. The wide range of modules that can be plugged into the software redefines the meaning of bespoke. Designed and tailored to you and your business, exactly how you want it.</p>
+      </div>
+      <ul class="statrow">
+        {stats.map((s) => (
+          <li data-reveal>
+            <b><span data-count={s.n}>{s.n}</span></b>
+            <span>{s.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- DEALERS -->
+  <section class="section dealers">
+    <div class="container wide dgrid">
+      <div class="dcopy">
+        <p class="eyebrow" data-reveal="fade">Dealer network</p>
+        <h2 data-split>Our main route to market is through <span class="serif">our dealers</span>.</h2>
+        <p class="lede" data-reveal>With a network of dealers worldwide, we continue to provide ongoing solutions and pioneering development to help our dealers with growth, regardless of the size.</p>
+        <div class="btn-row" data-reveal>
+          <Button href={url('dealers')} variant="primary" arrow>Become a dealer</Button>
+          <Button href={url('dealer-login')} variant="ghost" icon="lock">Dealer Login</Button>
+        </div>
+      </div>
+      <div class="dvis" data-reveal="scale" aria-hidden="true">
+        <div class="globe">
+          <svg viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="170" class="ring r1" /><circle cx="200" cy="200" r="120" class="ring r2" /><circle cx="200" cy="200" r="70" class="ring r3" />
+            <path d="M30 200h340M200 30v340M80 80c80 50 160 50 240 0M80 320c80-50 160-50 240 0" class="lines" />
+            {[[120,140],[250,110],[300,230],[170,270],[220,190],[90,240],[310,150]].map(([x,y],i) => (
+              <g><circle cx={x} cy={y} r="5" class="pt" /><circle cx={x} cy={y} r="5" class="pulse" style={`animation-delay:${i * 0.5}s`} /></g>
+            ))}
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="section alt support">
+    <div class="container wide sgrid">
+      <div>
+        <p class="eyebrow" data-reveal="fade">Support</p>
+        <h2 data-split>Our EPoS software <span class="serif">support</span></h2>
+        <p class="lede" data-reveal>At CES Software we aim to give the best service to all of our customers, at all times. Our support lines are open during normal working hours with the addition of emergency out-of-hours support. Whether it's a quick call or email to ask about any services that we provide or any features within our product, we are more than happy to assist you in giving you peace of mind.</p>
+      </div>
+      <ul class="contacts">
+        <li class="card spot lift" data-reveal><a href={site.phoneHref}><span class="ci"><Icon name="phone" size={22} /></span><span><small>Call us</small><b>{site.phone}</b></span></a></li>
+        <li class="card spot lift" data-reveal><a href={`mailto:${site.salesEmail}?subject=Enquiry`}><span class="ci"><Icon name="mail" size={22} /></span><span><small>Sales</small><b>{site.salesEmail}</b></span></a></li>
+        <li class="card spot lift" data-reveal><a href={`mailto:${site.supportEmail}?subject=Enquiry`}><span class="ci"><Icon name="mail" size={22} /></span><span><small>Support</small><b>{site.supportEmail}</b></span></a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* hero */
+  .hero { position: relative; padding: calc(var(--header-h) + clamp(40px, 6vw, 80px)) 0 clamp(60px, 8vw, 110px); overflow: clip; }
+  :global(.hband) { right: -10%; top: -12%; width: 74%; height: 100%; transform: skewY(-6deg); transform-origin: 100% 0; opacity: .95;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 40%), linear-gradient(to bottom, #000 60%, transparent 100%); -webkit-mask-composite: source-in; mask-composite: intersect;
+    mask-image: linear-gradient(to right, transparent 0%, #000 40%), linear-gradient(to bottom, #000 60%, transparent 100%); }
+  .hero-in { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+  .copy .display { margin: 0 0 28px; max-width: 12ch; }
+  .copy .display :global(.serif) { font-size: 1.06em; padding-right: .06em; }
+  .copy .lede { max-width: 46ch; }
+  .copy .btn-row { margin-top: 34px; }
+  .visual { position: relative; }
+  .dev :global(img) { width: 100%; height: auto; filter: drop-shadow(0 34px 40px oklch(28% .08 262 / .28)); }
+  .chip { position: absolute; z-index: 2; }
+  .chip-in { display: inline-flex; gap: 8px; align-items: center; padding: 10px 16px; border-radius: 999px; background: oklch(100% 0 0 / .86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid oklch(100% 0 0 / .7); box-shadow: 0 14px 30px -12px oklch(25% .08 262 / .35); font-weight: 550; font-size: .92rem; color: var(--ink); white-space: nowrap; animation: float 6s ease-in-out infinite alternate; }
+  .chip-in :global(svg) { color: var(--brand-ink); }
+  .c1 { left: -2%; top: 6%; } .c2 { right: -2%; top: 30%; } .c3 { left: 8%; bottom: -4%; }
+  .c2 .chip-in { animation-delay: -2s; } .c3 .chip-in { animation-delay: -4s; }
+  @keyframes float { to { transform: translateY(-14px); } }
+  @media (max-width: 900px) {
+    .hero { padding-bottom: 96px; }
+    .hero-in { grid-template-columns: 1fr; }
+    .visual { margin-inline: -6%; margin-top: 12px; }
+    .copy .display { max-width: 14ch; }
+    :global(.hband) { width: 130%; right: -30%; height: 60%; top: 30%; }
+    .c1 { left: 4%; top: -14%; } .c2 { right: 2%; top: 4%; } .c3 { left: 8%; bottom: -26%; }
+    .chip-in { font-size: .8rem; padding: 8px 12px; }
+  }
+
+  .mini { font-family: var(--font-mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; color: var(--ink-3); text-align: center; margin-bottom: 36px; }
+  .clients { padding-top: 0; }
+
+  .split { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 100px); align-items: start; }
+  .cols p { font-size: 1.1rem; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
+  /* bento */
+  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; }
+  .tile { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(24px, 3vw, 40px); min-height: 380px; grid-column: span 6; color: inherit; }
+  .tile.touch { grid-column: span 7; grid-row: span 2; }
+  .tile.ordering, .tile.rewards { grid-column: span 5; }
+  .tile.intel, .tile.edge { grid-column: span 6; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--brand-ink); background: var(--brand-soft); padding: 6px 12px; border-radius: 999px; margin-bottom: 20px; }
+  .tile h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); letter-spacing: -.03em; margin-bottom: 12px; max-width: 18ch; }
+  .tile p { max-width: 42ch; margin-bottom: 18px; }
+  .media { margin-top: 18px; display: grid; place-items: end center; }
+  .media :global(img) { max-height: 260px; width: auto; max-width: 100%; object-fit: contain; border-radius: 14px; transition: transform .8s var(--ease-out); }
+  .touch .media :global(img) { max-height: 300px; width: 100%; }
+  .tile:hover .media :global(img) { transform: scale(1.04) translateY(-4px); }
+  .tile.ordering, .tile.rewards, .tile.intel, .tile.edge { flex-direction: row; gap: 18px; align-items: stretch; }
+  .tile.ordering .txt, .tile.rewards .txt, .tile.intel .txt, .tile.edge .txt { flex: 1 1 52%; }
+  .tile.ordering .media, .tile.rewards .media, .tile.intel .media, .tile.edge .media { flex: 1 1 48%; margin: 0; align-self: end; }
+  .tile.edge .media :global(img) { max-height: 280px; }
+  @media (max-width: 1100px) { .tile.ordering, .tile.rewards, .tile.intel, .tile.edge { flex-direction: column; } .tile.ordering .media, .tile.rewards .media, .tile.intel .media, .tile.edge .media { place-items: end center; } }
+  @media (max-width: 900px) { .tile, .tile.touch, .tile.ordering, .tile.rewards, .tile.intel, .tile.edge { grid-column: 1 / -1; grid-row: auto; min-height: 0; } }
+
+  .more { text-align: center; margin-top: clamp(24px, 4vw, 48px); }
+
+  /* industries rail */
+  .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .arrows { display: flex; gap: 10px; margin-bottom: clamp(36px, 5vw, 64px); }
+  .ar { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-card); transition: .3s; color: var(--ink); }
+  .ar:hover:not([disabled]) { background: var(--ink); color: #fff; }
+  .ar[disabled] { opacity: .35; cursor: default; }
+  .ar :global(.flip) { transform: scaleX(-1); }
+  .rail { padding-left: max(var(--gutter), calc((100vw - var(--container-wide)) / 2)); }
+  .viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 28px; padding-right: var(--gutter); }
+  .viewport::-webkit-scrollbar { display: none; }
+  .is-drag .viewport { overflow: hidden; }
+  .track { display: flex; gap: 16px; width: max-content; }
+  .track li { flex: none; width: clamp(250px, 24vw, 320px); scroll-snap-align: start; }
+  .ind { display: block; }
+  .ind :global(img) { width: 100%; aspect-ratio: 10 / 11; object-fit: cover; transition: transform .8s var(--ease-out); -webkit-user-drag: none; }
+  .ind:hover :global(img) { transform: scale(1.06); }
+  .ind { overflow: hidden; }
+  .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 70px 20px 18px; display: flex; justify-content: space-between; align-items: flex-end; background: linear-gradient(to top, oklch(15% .03 262 / .85), transparent); color: #fff; }
+  .cap h3 { color: #fff; font-size: 1.3rem; }
+  .go { width: 38px; height: 38px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; transition: transform .4s var(--ease-out); }
+  .ind:hover .go { transform: rotate(45deg); }
+
+  .vgrid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+  @media (max-width: 900px) { .vgrid { grid-template-columns: 1fr; } }
+
+  /* stats */
+  .stats { overflow: hidden; }
+  .stats .glow { position: absolute; inset: auto -10% -40% -10%; height: 80%; opacity: .35; filter: blur(70px); background: radial-gradient(30% 50% at 15% 50%, var(--c-blue), transparent), radial-gradient(30% 50% at 40% 60%, var(--c-green), transparent), radial-gradient(30% 50% at 65% 60%, var(--c-orange), transparent), radial-gradient(30% 50% at 90% 50%, var(--c-red), transparent); animation: glow 16s ease-in-out infinite alternate; }
+  @keyframes glow { to { transform: translateX(6%) scale(1.1); } }
+  .split2 { position: relative; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 6vw, 100px); }
+  .split2 .body { font-size: 1.12rem; color: oklch(86% .015 262); }
+  .statrow { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: clamp(48px, 7vw, 96px); padding-top: 40px; border-top: 1px solid oklch(100% 0 0 / .14); }
+  .statrow b { display: block; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1; letter-spacing: -.045em; color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .statrow li > span { display: block; margin-top: 10px; color: oklch(80% .02 262); }
+  @media (max-width: 900px) { .split2 { grid-template-columns: 1fr; } .statrow { grid-template-columns: 1fr 1fr; } }
+
+  /* dealers */
+  .dgrid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 100px); align-items: center; }
+  .dcopy h2 { max-width: 16ch; }
+  .dcopy .lede { margin: 22px 0 32px; }
+  .globe svg { width: min(100%, 460px); margin-inline: auto; overflow: visible; }
+  .ring { fill: none; stroke: var(--line); stroke-width: 1.5; } .r1 { stroke: oklch(88% .02 262); } 
+  .lines { fill: none; stroke: oklch(90% .01 262); stroke-width: 1.2; stroke-dasharray: 3 5; }
+  .pt { fill: var(--brand-ink); }
+  .pulse { fill: var(--c-red); transform-box: fill-box; transform-origin: center; animation: pulse 3s ease-out infinite; opacity: .5; }
+  @keyframes pulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(5); opacity: 0; } }
+  @media (max-width: 900px) { .dgrid { grid-template-columns: 1fr; } }
+
+  /* support */
+  .sgrid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 100px); align-items: center; }
+  .sgrid .lede { margin-top: 22px; font-size: 1.1rem; }
+  .contacts { display: grid; gap: 14px; }
+  .contacts li a { display: flex; align-items: center; gap: 18px; padding: 22px 26px; }
+  .ci { width: 52px; height: 52px; border-radius: 16px; background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; flex: none; }
+  .contacts small { display: block; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+  .contacts b { color: var(--ink); font-size: 1.15rem; font-weight: 600; letter-spacing: -.02em; word-break: break-word; }
+  @media (max-width: 900px) { .sgrid { grid-template-columns: 1fr; } }
+</style>

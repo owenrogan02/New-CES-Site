@@ -1,0 +1,43 @@
+:root {
+  /* Brand: sampled from the CES Software logo (blue, green, orange, red dots) */
+  --c-blue: #0f75bc;
+  --c-green: #14a751;
+  --c-orange: #f58220;
+  --c-red: #e41d3e;
+
+  --ink: oklch(19% 0.035 262);
+  --ink-2: oklch(38% 0.025 262);
+  --ink-3: oklch(52% 0.02 262);
+  --paper: #fff;
+  --paper-2: oklch(98.3% 0.004 262);
+  --paper-3: oklch(96% 0.008 262);
+  --line: oklch(92% 0.008 262);
+  --brand: var(--c-red);
+  --brand-ink: #b8112f; /* brand red for text on white, >= 4.5:1 */
+  --brand-soft: oklch(96% 0.025 15);
+
+  --grad-1: var(--c-blue);
+  --grad-2: var(--c-green);
+  --grad-3: var(--c-orange);
+  --grad-4: var(--c-red);
+  --grad-flow: linear-gradient(100deg, var(--c-blue), var(--c-green) 35%, var(--c-orange) 68%, var(--c-red));
+
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 24px;
+  --radius-xl: 32px;
+  --shadow-card: 0 1px 2px oklch(0% 0 0 / 0.04), 0 8px 24px -10px oklch(30% 0.05 262 / 0.14);
+  --shadow-float: 0 30px 60px -22px oklch(30% 0.08 262 / 0.28);
+
+  --container: 1200px;
+  --container-wide: 1360px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-y: clamp(80px, 11vw, 150px);
+  --header-h: 76px;
+
+  --font-sans: 'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

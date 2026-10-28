@@ -1,0 +1,30 @@
+---
+import Button from './Button.astro';
+import { site } from '../config/site';
+import { url } from '../lib/url';
+type Props = { title?: string; body?: string };
+const { title = 'Let’s talk about your business.', body = 'Contact our dedicated team by phone or email. We’ll connect you with the right solution, and your nearest authorised CES dealer.' } = Astro.props;
+---
+<section class="cta section tight">
+  <div class="container wide">
+    <div class="box ink" data-reveal="scale">
+      <div class="glow" aria-hidden="true"></div>
+      <h2 data-split set:html={title} />
+      <p>{body}</p>
+      <div class="row">
+        <Button href={url('contact')} variant="glow" arrow>Contact us</Button>
+        <Button href={site.phoneHref} variant="ghost" icon="phone">{site.phone}</Button>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .box { position: relative; overflow: hidden; border-radius: var(--radius-xl); background: var(--ink); color: oklch(86% 0.015 262); padding: clamp(40px, 7vw, 96px); text-align: center; isolation: isolate; }
+  .box h2 { color: #fff; max-width: 18ch; margin: 0 auto; font-size: clamp(2.2rem, 5vw, 4rem); }
+  .box p { max-width: 54ch; margin: 22px auto 34px; font-size: 1.15rem; }
+  .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .glow { position: absolute; inset: -30% -10% auto -10%; height: 90%; z-index: -1; opacity: .55; filter: blur(60px);
+    background: radial-gradient(40% 60% at 20% 40%, var(--c-blue), transparent 70%), radial-gradient(35% 55% at 55% 20%, var(--c-green), transparent 70%), radial-gradient(35% 60% at 80% 40%, var(--c-orange), transparent 70%), radial-gradient(30% 50% at 95% 70%, var(--c-red), transparent 70%);
+    animation: drift 14s ease-in-out infinite alternate; }
+  @keyframes drift { to { transform: translate3d(4%, 6%, 0) scale(1.08); } }
+</style>

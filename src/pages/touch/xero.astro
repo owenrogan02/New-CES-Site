@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Feature from '../../components/Feature.astro';
+import Steps from '../../components/Steps.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Pic from '../../components/Pic.astro';
+import Icon from '../../components/Icon.astro';
+import CTABand from '../../components/CTABand.astro';
+import { site } from '../../config/site';
+import { url } from '../../lib/url';
+
+const reqs = ['CES Touch Version 11.0.035 or above', 'Touch needs to be licenced for Xero', 'Xero account with API Access', 'Windows 10 or higher'];
+---
+<Base title="CES Touch x Xero | CES Software" progress>
+  <PageHero eyebrow="CES Touch x Xero" title="Xero integration <span class='serif grad-text'>sign-up</span> process" lede="This page is for existing users of CES Touch EPoS Software who wish to connect their system to Xero." image="header.png" imageAlt="CES Touch connected to Xero" imageWidth={800}>
+    <Button href={`mailto:${site.salesEmail}`} variant="primary" arrow>Email sales</Button>
+    <Button href="#how" variant="secondary">How it works</Button>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container narrow prose">
+      <p data-reveal>CES Touch is supplied and supported through our network of authorised dealers. To enable the Xero integration, please contact the dealer you purchased your software from and request to have the Xero module added to your Touch licence.</p>
+      <p data-reveal>Once the module has been added, your dealer will guide you through the process of connecting CES Touch to Xero and help configure the integration settings as required.</p>
+      <p data-reveal>If you’re unsure who your CES dealer is, or if you’re interested in purchasing CES Touch EPoS Software, we’re here to help. Simply email us at <a href={`mailto:${site.salesEmail}`}>{site.salesEmail}</a> with your details, and a member of our team will contact you and connect you with your nearest authorised CES dealer.</p>
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container wide">
+      <Feature title="Automated Daily Sales Posting" paras={['At the end of each trading day, a consolidated sales invoice is automatically created in Xero. Sales are split by nominal codes and payment methods to ensure reporting matches your Touch sales reports.']} image="automated_daily_sales.png" alt="Automated daily sales posting" />
+      <Feature flip title="Accurate Financial Data" paras={['Includes service charge, gratuities, paid in/out, and discounts so that your financial data in Xero always mirrors the figures on your POS.']} image="accurate_financial_data.png" alt="Accurate financial data" />
+      <Feature title="Customer Accounts" paras={['Automatically create and update customer accounts in Xero, posting individual invoices, credit notes, and payments directly to matching contacts.']} image="customer_account_support.png" alt="Customer account support" />
+      <Feature flip title="Simple & Secure Connection" paras={['Connect your CES system to Xero using a secure OAuth2 link. Once connected, the integration runs automatically.']} image="secure_connection.png" alt="Secure connection" />
+      <Feature title="Error Handling & Logging" paras={['Stay in control with clear error messages and detailed logs. Each post to Xero is fully tracked, ensuring quick identification and resolution of any issues during data transfer.']} image="Error_Handling_Logging.png" alt="Error handling and logging" />
+      <Feature flip title="Benefits" bullets={['Save hours of manual bookkeeping every week', 'Eliminate human error in sales reconciliation', 'Keep Xero always up to date with real-time business performance', 'Improve visibility of revenue across all locations']} image="Benefits.png" alt="Benefits of the Xero integration" />
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="container wide">
+      <SectionHead eyebrow="How it works" title="Three steps to <span class='serif'>automatic</span> posting." />
+      <Steps cols={3} steps={[
+        { title: 'Connect to Xero', body: 'Authorise CES Touch to securely link to your Xero organisation.' },
+        { title: 'Configure Settings', body: 'Select your nominal codes, payment mappings, and posting options.' },
+        { title: 'Automatic Posting', body: 'Daily sales and account transactions post automatically to Xero.' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container narrow">
+      <SectionHead eyebrow="Requirements" title="What you <span class='serif'>need</span>." />
+      <ul class="reqs">
+        {reqs.map((r) => <li class="card" data-reveal><span class="tick"><Icon name="check" size={16} /></span>{r}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CTABand title="Ready to connect Touch to <span class='serif'>Xero</span>?" body="Email us with your details and a member of our team will connect you with your nearest authorised CES dealer." />
+</Base>
+
+<style>
+  .reqs { display: grid; gap: 12px; }
+  .reqs li { display: flex; align-items: center; gap: 16px; padding: 18px 22px; box-shadow: none; font-weight: 550; color: var(--ink); }
+  .tick { width: 30px; height: 30px; border-radius: 50%; background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; flex: none; }
+</style>

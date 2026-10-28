@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Button from '../components/Button.astro';
+import { site } from '../config/site';
+import { url } from '../lib/url';
+---
+<Base title="Contact Us | CES Software" description="Contact CES Software by telephone on 01992 564 645, or by email to sales@cessoftware.com and support@cessoftware.com." progress>
+  <PageHero eyebrow="Contact us" title="We’d love to hear <span class='serif grad-text'>from you</span>." lede="Constant feedback from our passionate customers is greatly appreciated and is always taken on board. If you would like us to answer any questions or if you require any additional information about any of our products and services, please feel free to get in touch with our dedicated team. You can contact us via email or by telephone." compact />
+
+  <section class="section tight">
+    <div class="container wide grid">
+      <ul class="cards">
+        <li class="card spot lift" data-reveal><a href={site.phoneHref}><span class="ci"><Icon name="phone" size={24} /></span><span><small>Telephone</small><b>{site.phone}</b></span><Icon name="arrow-up-right" size={20} class="go" /></a></li>
+        <li class="card spot lift" data-reveal><a href={`mailto:${site.salesEmail}?subject=Enquiry`}><span class="ci"><Icon name="mail" size={24} /></span><span><small>Sales</small><b>{site.salesEmail}</b></span><Icon name="arrow-up-right" size={20} class="go" /></a></li>
+        <li class="card spot lift" data-reveal><a href={`mailto:${site.supportEmail}?subject=Enquiry`}><span class="ci"><Icon name="mail" size={24} /></span><span><small>Support</small><b>{site.supportEmail}</b></span><Icon name="arrow-up-right" size={20} class="go" /></a></li>
+      </ul>
+      <div class="side">
+        <article class="card addr" data-reveal>
+          <p class="eyebrow">Registered address</p>
+          <address>{site.address.map((l) => <span>{l}</span>)}</address>
+        </article>
+        <article class="card addr" data-reveal>
+          <p class="eyebrow">Support hours</p>
+          <p>Our support lines are open during normal working hours with the addition of emergency out-of-hours support.</p>
+        </article>
+        <div data-reveal><Button href={url('dealers')} variant="secondary" arrow>Interested in becoming a dealer?</Button></div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .cards { display: grid; gap: 16px; }
+  .cards a { display: flex; align-items: center; gap: 20px; padding: 28px 30px; }
+  .ci { width: 60px; height: 60px; border-radius: 18px; background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; flex: none; }
+  small { display: block; font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+  b { color: var(--ink); font-size: clamp(1.15rem, 2vw, 1.5rem); letter-spacing: -.025em; font-weight: 600; word-break: break-word; }
+  .cards :global(.go) { margin-left: auto; color: var(--ink-3); transition: transform .4s var(--ease-out), color .3s; flex: none; }
+  .cards a:hover :global(.go) { transform: translate(3px, -3px); color: var(--brand-ink); }
+  .side { display: grid; gap: 16px; }
+  .addr { padding: 28px 30px; box-shadow: none; }
+  .addr p:last-child { margin: 0; }
+  address { font-style: normal; display: grid; color: var(--ink); font-size: 1.1rem; line-height: 1.55; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+</style>

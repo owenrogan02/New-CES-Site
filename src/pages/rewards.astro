@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Feature from '../components/Feature.astro';
+import Steps from '../components/Steps.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Pic from '../components/Pic.astro';
+import CTABand from '../components/CTABand.astro';
+import { url } from '../lib/url';
+---
+<Base title="CES Rewards | CES Software" progress>
+  <PageHero eyebrow="CES Rewards" title="Turn every visit into a <span class='serif grad-text'>reason to come back</span>." lede="Transform one-time visitors into dedicated regulars. Built to operate seamlessly alongside CES Touch, the CES Rewards platform gives you the power to run a bespoke loyalty app or an out-of-the-box customer rewards scheme.">
+    <Button href={url('contact')} variant="primary" arrow>Get in touch</Button>
+    <Button href="#steps" variant="secondary">How it works</Button>
+    <div slot="visual" class="fan">
+      <div class="ph p1"><Pic src="ces_rewards_2.jpg" alt="CES Rewards app screen" width={471} sizes="240px" priority /></div>
+      <div class="ph p2"><Pic src="ces_rewards_3.jpg" alt="CES Rewards app screen" width={471} sizes="240px" priority /></div>
+      <div class="ph p3"><Pic src="ces_rewards_4.jpg" alt="CES Rewards app screen" width={471} sizes="240px" priority /></div>
+    </div>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container narrow">
+      <p class="lede" data-reveal>Empower your customers to sign up in seconds, collect points on every transaction, and redeem exclusive perks, driving repeat business and increasing average basket spend across your venues.</p>
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container wide">
+      <Feature eyebrow="Complete loyalty management in one central platform" title="Bespoke Apps & Flexible Points Engine" paras={['Take control of your customer retention strategy. Whether deploying a custom-branded app tailored to your business identity or launching our ready-to-go CES Rewards system, onboarding is effortless. Your customers track points and unlock vouchers right from their pocket, while your front-of-house staff award and redeem rewards directly through the till.']} bullets={[
+        '**Configurable Earning Rules:** Define precisely how many points customers earn per pound spent and set exact conversion values for voucher redemptions.',
+        '**Tiered Membership Schemes:** Build multi-level programmes such as Gold Clubs, VIP tiers, and Members Clubs with automated access to exclusive member-only pricing.',
+        '**Real-Time Till Synchronisation:** Fully integrated with your CES Touch POS, updating customer balances and applying discounts with zero double-keying.',
+      ]} image="complete-loyalty-management.png" alt="Complete loyalty management" />
+      <Feature flip title="More Than Just Points - Drive Higher Lifetime Spend" paras={['Traditional punch cards get lost or forgotten. Digital loyalty gives you the tools to actively drive footfall during quieter trading periods and reward your highest-spending patrons.', 'Tailor promotions to specific customer groups, launch limited-time offers, and deliver targeted incentives directly through the app. By building direct digital relationships, you encourage repeat visits, boost customer engagement, and substantially increase customer lifetime value.']} image="more-than-just-points.png" alt="More than just points" />
+      <Feature title="Expand Revenue with Integrated Gift Cards" paras={['Attract new patrons and unlock immediate upfront revenue. Gift Cards are natively embedded into the CES loyalty ecosystem, giving you versatile options to issue, top up, and redeem balances across all your registers.']} bullets={[
+        '**Ticket-Printed Gift Cards:** Generate barcode or QR-coded gift vouchers directly from your standard receipt printers on demand.',
+        '**Physical Swipe & Contactless Cards:** Issue branded, durable magnetic-stripe or RFID swipe cards for a premium gift presentation.',
+        '**Frictionless Redemption:** Redeem gift card balances at the POS in seconds, with automatic balance tracking and reloads managed directly through the system.',
+      ]} image="integrated-gift-cards.png" alt="Integrated gift cards" />
+    </div>
+  </section>
+
+  <section class="section" id="steps">
+    <div class="container wide">
+      <SectionHead eyebrow="How it works" title="From first tap to instant reward in <span class='serif'>4 easy steps</span>." />
+      <Steps steps={[
+        { title: '1. Join', body: 'Customer downloads your branded app or scans a QR code at the counter to join instantly.' },
+        { title: '2. Spend', body: 'Points accrue automatically at the POS whenever a purchase is rung up through CES Touch.' },
+        { title: '3. Unlock', body: 'Reaching milestone totals triggers tiered perks, VIP price levels, and redeemable vouchers.' },
+        { title: '4. Redeem', body: 'Staff scan the member’s app or gift card at checkout to apply savings instantly.' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container narrow store" data-reveal>
+      <Pic src="ces_rewards.svg" alt="CES Rewards" width={270} class="logo" />
+      <h2>One platform. <span class="serif">Multiple possibilities.</span></h2>
+      <p>Whether you need a simple points-and-rewards scheme, an exclusive members club, a standalone gift card programme, or an all-in-one retention engine, CES Rewards is engineered to scale with your business.</p>
+      <div class="badges"><Pic src="app_store.png" alt="Download on the App Store" width={540} sizes="180px" /><Pic src="google_play.png" alt="Get it on Google Play" width={540} sizes="180px" /></div>
+    </div>
+  </section>
+
+  <CTABand title="Give customers a reason to <span class='serif'>return</span>." />
+</Base>
+
+<style>
+  .fan { position: relative; height: clamp(360px, 42vw, 560px); }
+  .ph { position: absolute; width: 40%; border-radius: 26px; padding: 6px; background: var(--ink); box-shadow: var(--shadow-float); overflow: hidden; top: 50%; }
+  .ph :global(img) { width: 100%; height: auto; border-radius: 21px; }
+  .p1 { left: 4%; transform: translateY(-46%) rotate(-8deg); }
+  .p2 { left: 30%; transform: translateY(-54%); z-index: 2; }
+  .p3 { left: 56%; transform: translateY(-46%) rotate(8deg); }
+  .store { text-align: center; }
+  .store :global(.logo) { height: 56px; width: auto; margin: 0 auto 24px; }
+  .store h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
+  .store p { margin: 16px auto 28px; max-width: 58ch; }
+  .badges { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .badges :global(img) { width: 180px; height: auto; }
+</style>

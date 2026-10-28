@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import Pic from '../../components/Pic.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Story from '../../components/Story.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
+import CTABand from '../../components/CTABand.astro';
+import { industries, partners } from '../../config/data';
+import { url } from '../../lib/url';
+---
+<Base title="Bespoke EPoS Software | CES Touch | CES Software">
+  <PageHero eyebrow="CES Touch" title="Bespoke <span class='serif grad-text'>EPoS</span> software" lede="CES Touch was first released in 1997. Since then it has constantly evolved and adapted to become a market leader in the provision of powerful, user-friendly point of sale applications." image="3tills.jpg" imageAlt="CES Touch EPoS System displayed on Hardware" imageWidth={1100}>
+    <Button href="#keyfeatures" variant="primary" arrow>Key features</Button>
+    <Button href="#modules" variant="secondary">Available modules</Button>
+  </PageHero>
+
+  <section class="section tight intro">
+    <div class="container wide cols">
+      <p data-reveal>The wide range of modules that can be plugged into the software redefines the meaning of bespoke. Modules can be activated or deactivated with ease to ensure your business runs as efficiently as possible. With over 15 years of development, Touch can adapt to any environment it is put into, making it the most viable solution for any industry.</p>
+      <p data-reveal>CES Touch is an advanced all-in-one EPoS software built for any industry. Touch allows for remote access that enables you to stay in control of your business no matter where you are. You can supervise access to features and functionality for individual users, or groups of users. With the addition of the screen designer, you can setup Touch the way you want it to ensure ease of use and rapid operation. Touch provides you with the most accurate business overview at any point in near real time reporting that can be used in conjunction with our enterprise cloud reporting software.</p>
+      <p data-reveal>CES Software cares about your business, one of the ways we show this is by offering bespoke software development with our software. All we need to know are your thoughts and what you would like to do with our software and we can help provide appropriate solutions that will help to enhance your business.</p>
+    </div>
+  </section>
+
+  <section class="section tight devices">
+    <div class="container wide trio">
+      <figure class="card" data-reveal><Pic src="3tills.jpg" alt="CES Touch EPoS System displayed on Hardware" width={1100} sizes="(max-width: 900px) 100vw, 420px" /></figure>
+      <figure class="card" data-reveal><Pic src="tablets.jpg" alt="CES Touch EPoS System displayed on Tablet devices" width={1012} sizes="(max-width: 900px) 100vw, 420px" /></figure>
+      <figure class="card" data-reveal><Pic src="reporting.jpg" alt="CES Touch EPoS System displaying Business Analytics" width={1012} sizes="(max-width: 900px) 100vw, 420px" /></figure>
+    </div>
+  </section>
+
+  <section class="section alt" id="keyfeatures">
+    <div class="container wide">
+      <SectionHead eyebrow="Key features" title="Everything an <span class='serif'>all-in-one</span> system should be." />
+      <Story />
+    </div>
+  </section>
+
+  <section class="section" id="industries">
+    <div class="container wide">
+      <SectionHead eyebrow="Your industry" title="Pick your <span class='serif'>industry</span>." lede="Touch is tailored to the way each sector trades, with modules hand picked for each." />
+      <ul class="igrid">
+        {industries.map((i) => (
+          <li data-reveal>
+            <a href={url(`industries/${i.slug}`)} class="card lift ind">
+              <Pic src={i.photo} alt="" width={500} sizes="(max-width: 700px) 50vw, 280px" />
+              <div class="cap"><h3>{i.name}</h3><span class="go"><Icon name="arrow-up-right" size={18} /></span></div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section alt" id="modules">
+    <div class="container wide">
+      <SectionHead eyebrow="Available modules" title="Plug in only what you <span class='serif'>need</span>." lede="These modules can be selected specifically for your industry. This allows you to create a completely bespoke system that is right for your business. If you feel that you require a specific module or you do not need a module, let us know and we will be more than happy to make the changes so that your business can run as efficiently as possible." />
+      <ModuleGrid />
+      <div class="xero card spot lift" data-reveal>
+        <Pic src="xero_module.png" alt="" width={64} sizes="64px" />
+        <div><h3>Xero Link Integration</h3><p>Daily sales posted straight to Xero, automatically.</p></div>
+        <Button href={url('touch/xero')} variant="secondary" arrow>See how it works</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <div class="container wide">
+      <SectionHead eyebrow="Our partners" title="Linked to the apps you <span class='serif'>already use</span>." />
+      <ul class="plist">
+        {partners.map((p) => (
+          <li class="card" data-reveal><Pic src={p.file} alt={p.name} width={150} sizes="120px" /><span>{p.name}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CTABand title="Ready to see CES Touch <span class='serif'>in action</span>?" />
+</Base>
+
+<style>
+  .intro .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 56px); }
+  .intro p { font-size: 1.05rem; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .trio figure { margin: 0; background: #fff; display: grid; place-items: center; padding: 18px; }
+  .trio :global(img) { width: 100%; height: auto; }
+  .igrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .ind { display: block; overflow: hidden; }
+  .ind :global(img) { width: 100%; aspect-ratio: 10 / 11; object-fit: cover; transition: transform .8s var(--ease-out); }
+  .ind:hover :global(img) { transform: scale(1.06); }
+  .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 70px 18px 16px; display: flex; justify-content: space-between; align-items: flex-end; background: linear-gradient(to top, oklch(15% .03 262 / .85), transparent); }
+  .cap h3 { color: #fff; font-size: 1.15rem; }
+  .go { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; transition: transform .4s var(--ease-out); flex: none; }
+  .ind:hover .go { transform: rotate(45deg); }
+  .xero { margin-top: 28px; display: flex; align-items: center; gap: 22px; padding: 22px 28px; flex-wrap: wrap; }
+  .xero :global(img) { width: 56px; height: 56px; }
+  .xero div { flex: 1 1 260px; } .xero h3 { margin-bottom: 4px; } .xero p { margin: 0; }
+  .plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+  .plist li { display: flex; align-items: center; gap: 14px; padding: 14px 16px; box-shadow: none; }
+  .plist :global(img) { width: 56px; height: 56px; object-fit: contain; flex: none; }
+  .plist span { font-weight: 550; color: var(--ink); line-height: 1.25; font-size: .95rem; }
+  @media (max-width: 1000px) { .igrid { grid-template-columns: repeat(2, 1fr); } .intro .cols, .trio { grid-template-columns: 1fr; } }
+</style>

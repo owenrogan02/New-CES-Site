@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { site } from '../config/site';
+import { url } from '../lib/url';
+---
+<Base title="Become a CES Software Dealer | Sell our Tills Software" description="Become a dealer of our advanced Tills Software. For more information on becoming a CES Software Dealer please get in touch." progress>
+  <PageHero eyebrow="Dealers" title="Become a CES <span class='serif grad-text'>Software</span> dealer" lede="CES Software’s main route to market is through its dealers. For more information on becoming a CES Software Dealer please get in touch. We shall then get back in touch with you.">
+    <Button href={`mailto:${site.salesEmail}?subject=Dealer%20enquiry`} variant="primary" icon="mail" arrow>Email us about becoming a dealer</Button>
+    <Button href={site.phoneHref} variant="secondary" icon="phone">{site.phone}</Button>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container wide grid">
+      <div class="prose big">
+        <p data-reveal>With a network of dealers worldwide, we continue to provide ongoing solutions and pioneering development to help our dealers with growth, regardless of the size. As we understand that no two businesses are alike and many have different needs, we believe the key to our success is the result of providing a service that is uniquely tailored to meet the needs of the dealer.</p>
+        <p data-reveal>To begin with, we want to know your needs and requirements as your business is unique compared to others. We like to stay in continuous contact to help you along the way to a successful outcome and to ensure all of your needs have been fulfilled.</p>
+      </div>
+      <aside class="card login" data-reveal>
+        <span class="lk"><Icon name="lock" size={22} /></span>
+        <h2>Already a CES dealer?</h2>
+        <p>The dealer section provides access to software information, the support helpdesk and other useful links.</p>
+        <Button href={url('dealer-login')} variant="primary" arrow>Sign in to the dealer portal</Button>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(28px, 6vw, 96px); align-items: start; }
+  .big p { font-size: 1.15rem; }
+  .login { padding: 36px; }
+  .lk { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 16px; background: var(--ink); color: #fff; margin-bottom: 20px; }
+  .login h2 { font-size: 1.7rem; margin-bottom: 10px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Pic from '../components/Pic.astro';
+import GradientBand from '../components/GradientBand.astro';
+import { dealerLogin } from '../config/site';
+import { url } from '../lib/url';
+---
+<Base title="Dealer Login | CES Software" isLogin bodyClass="login-page">
+  <section class="dl" data-hero>
+    <GradientBand class="dlband" />
+    <div class="container wide dl-in">
+      <div class="panel" aria-hidden="false">
+        <p class="eyebrow">Dealers</p>
+        <h2 class="pt">{dealerLogin.panelTitle}</h2>
+        <p class="pb">{dealerLogin.panelBody}</p>
+        <a class="link-arrow" href={url('dealers')}>Become a dealer <Icon name="arrow" size={16} /></a>
+      </div>
+
+      <div class="card login" style="view-transition-name: dealer-login">
+        <span class="badge">{dealerLogin.badge}</span>
+        <Pic src="cessoftware.png" alt="CES Software" width={160} sizes="160px" class="logo" />
+        <h1>{dealerLogin.title}</h1>
+        <p class="sub">{dealerLogin.subtitle}</p>
+
+        <!-- Visual placeholder only: no action, no field names, nothing is ever submitted. -->
+        <form data-login-form autocomplete="off" novalidate>
+          <label class="fld"><input type="text" placeholder=" " autocomplete="off" aria-label="Email or username" /><span>Email or username</span></label>
+          <label class="fld"><input type="password" placeholder=" " autocomplete="off" aria-label="Password" data-pw /><span>Password</span>
+            <button type="button" class="eye" data-pw-toggle aria-label="Show password" aria-pressed="false"><Icon name="eye" size={18} /></button>
+          </label>
+          <div class="row">
+            <label class="chk"><input type="checkbox" /> Remember me</label>
+            <a href="#forgot" data-toast-link>Forgot password?</a>
+          </div>
+          <button type="submit" class="btn primary sub-btn"><span class="lbl">Sign in</span><span class="spin" aria-hidden="true"></span></button>
+        </form>
+        <p class="foot"><a href={url('dealers')}>{dealerLogin.becomeDealer}</a></p>
+      </div>
+    </div>
+    <div class="toast" data-toast role="status" aria-live="polite"><Icon name="lock" size={18} /> {dealerLogin.toast}</div>
+  </section>
+</Base>
+
+<style>
+  .dl { position: relative; min-height: 100svh; padding: calc(var(--header-h) + 40px) 0 60px; display: grid; align-items: center; overflow: clip; }
+  :global(.dlband) { inset: 0; opacity: .55; }
+  .dl-in { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: clamp(32px, 8vw, 140px); align-items: center; }
+  .panel { max-width: 520px; }
+  .pt { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 18px; }
+  .pb { font-size: 1.15rem; max-width: 44ch; margin-bottom: 22px; }
+  .login { padding: clamp(28px, 4vw, 44px); box-shadow: var(--shadow-float); background: oklch(100% 0 0 / .94); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); overflow: visible; }
+  .badge { position: absolute; top: -12px; right: 24px; background: var(--ink); color: #fff; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+  .login :global(.logo) { width: 130px; height: auto; margin-bottom: 26px; }
+  .login h1 { font-size: 2rem; letter-spacing: -.035em; }
+  .sub { margin: 6px 0 26px; }
+  form { display: grid; gap: 14px; }
+  .fld { position: relative; display: block; }
+  .fld input { width: 100%; height: 58px; border-radius: 14px; border: 1px solid var(--line); background: #fff; padding: 22px 16px 6px; font: inherit; color: var(--ink); transition: border-color .25s, box-shadow .25s; }
+  .fld input[type='password'], .fld input[data-pw] { padding-right: 48px; }
+  .fld span { position: absolute; left: 16px; top: 17px; color: var(--ink-3); pointer-events: none; transition: transform .25s var(--ease-out), font-size .25s, top .25s; transform-origin: left; }
+  .fld input:focus { outline: none; border-color: var(--c-blue); box-shadow: 0 0 0 4px color-mix(in oklab, var(--c-blue) 18%, transparent); }
+  .fld input:focus + span, .fld input:not(:placeholder-shown) + span { top: 8px; font-size: .74rem; color: var(--c-blue); }
+  .eye { position: absolute; right: 8px; top: 8px; width: 42px; height: 42px; border: 0; background: none; border-radius: 10px; cursor: pointer; color: var(--ink-3); display: grid; place-items: center; }
+  .eye:hover { background: var(--paper-3); color: var(--ink); }
+  .row { display: flex; justify-content: space-between; align-items: center; font-size: .94rem; }
+  .chk { display: inline-flex; gap: 10px; align-items: center; cursor: pointer; }
+  .chk input { width: 18px; height: 18px; accent-color: var(--ink); }
+  .row a { color: var(--brand-ink); font-weight: 550; }
+  .row a:hover, .foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sub-btn { --h: 54px; width: 100%; margin-top: 4px; position: relative; }
+  .spin { position: absolute; width: 20px; height: 20px; border-radius: 50%; border: 2px solid oklch(100% 0 0 / .35); border-top-color: #fff; opacity: 0; animation: rot .7s linear infinite; }
+  .sub-btn.loading .lbl { opacity: 0; } .sub-btn.loading .spin { opacity: 1; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+  .foot { text-align: center; margin: 22px 0 0; font-size: .95rem; }
+  .foot a { color: var(--ink); font-weight: 550; }
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 24px); background: var(--ink); color: #fff; padding: 14px 20px; border-radius: 14px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-float); opacity: 0; pointer-events: none; transition: .45s var(--ease-out); z-index: 200; max-width: calc(100vw - 32px); }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  @media (max-width: 900px) { .dl-in { grid-template-columns: 1fr; } .panel { display: none; } .login { max-width: 480px; margin-inline: auto; width: 100%; } }
+</style>

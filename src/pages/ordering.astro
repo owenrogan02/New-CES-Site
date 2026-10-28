@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Feature from '../components/Feature.astro';
+import Steps from '../components/Steps.astro';
+import Phones from '../components/Phones.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Pic from '../components/Pic.astro';
+import CTABand from '../components/CTABand.astro';
+import { url } from '../lib/url';
+
+const shots = Array.from({ length: 12 }, (_, i) => `order-soft-${i + 1}.jpg`);
+---
+<Base title="CES OrderSoft & QR Ordering | CES Software" description="CES OrderSoft handheld ordering and CES QR Ordering for guests, both synced with CES Touch EPoS. Faster service, integrated payments, no double entry. Call 01992 564 645." progress>
+  <PageHero eyebrow="CES Ordering" title="CES OrderSoft & <span class='serif grad-text'>QR code</span> ordering" lede="Guest QR ordering and staff handheld ordering, with integrated payments, built to streamline your hospitality service." image="ces_ordersoft_hero_desktop.png" imageAlt="CES OrderSoft EPoS System displayed on Hardware" imageWidth={1000}>
+    <Button href={url('contact')} variant="primary" arrow>Talk to us</Button>
+    <Button href="#handheld" variant="secondary">OrderSoft handheld</Button>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container narrow">
+      <p class="lede" data-reveal>Transform how your venue takes orders and handles transactions with two solutions developed in-house to work in complete harmony with CES Touch. QR Ordering lets guests browse, order and pay from their own phone. CES OrderSoft puts ordering, bill printing and payments in your staff's hands at the table. Use one or run both side by side.</p>
+    </div>
+  </section>
+
+  <section class="section alt tight" id="qr">
+    <div class="container wide">
+      <Feature eyebrow="QR Ordering" title="Order & Pay From Your Seat" paras={['Give your customers the freedom to order food and drinks directly from their dining table, bar seat, café bench, or theatre stall using a simple QR code scan on their smartphone, no app download required.']} bullets={[
+        '**Built-in Dietary & Allergen Protection:** Customers select their dietary preferences and allergen requirements before ordering. If an item contains a flagged allergen, QR ordering automatically alerts the guest before they can proceed.',
+        '**Instant Kitchen & Bar Dispatch:** Orders route straight to the kitchen or dispense bar for immediate prep, cutting counter queues and eliminating order bottlenecks.',
+        '**Fast, Secure Mobile Payments:** Guests settle their bill instantly via Apple Pay, Google Pay, or card, freeing your front-of-house team to focus purely on hospitality.',
+      ]} image="ordersoft-ScanQR.png" alt="Scanning a QR code to order" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container wide">
+      <SectionHead eyebrow="How QR Ordering works" title="From scan to service in <span class='serif'>4 easy steps</span>." />
+      <Steps steps={[
+        { title: '1. Scan', body: 'Guest scans the QR code at their seat to open your live digital menu.' },
+        { title: '2. Select', body: 'Filters allergens, picks dishes, and customises modifiers and drinks.' },
+        { title: '3. Pay', body: 'Settles the bill instantly via secure mobile checkout.' },
+        { title: '4. Serve', body: 'Order prints directly to the bar/kitchen and is delivered straight to the seat.' },
+      ]} />
+      <p class="note" data-reveal><strong>QR Ordering</strong> needs no extra hardware. Guests use their own smartphone, with no app to download.</p>
+    </div>
+  </section>
+
+  <section class="section alt" id="handheld">
+    <div class="container wide">
+      <SectionHead eyebrow="Mobile ordering & integrated payments in one device" title="OrderSoft: handheld table ordering & <span class='serif'>payments</span>." lede="Take your table service to the next level with our in-house developed handheld solution. Built natively for Android and iOS, OrderSoft turns mobile hardware into an all-in-one ordering and payment station. With seamless Dojo Tap to Pay (TaP) integration on Android, waitstaff can manage the entire guest journey-from browsing and order entry to bill printing and contactless card processing-on a single handheld terminal." />
+      <ul class="pts">
+        <li class="card spot" data-reveal><h3>Familiar & Intuitive Interface</h3><p>Engineered to mirror CES Touch, allowing staff to navigate menus, condiment prompts, and open-price items with zero friction.</p></li>
+        <li class="card spot" data-reveal><h3>Flexible Display Modes</h3><p>Customise screen views with button or list modes to suit your team's workflow and menu complexity.</p></li>
+        <li class="card spot" data-reveal><h3>Seamless iOS & Wavesoft Upgrade</h3><p>Also available for iOS devices, offering a direct, modern upgrade path for existing Wavesoft users.</p></li>
+      </ul>
+      <div class="gal"><Phones images={shots} label="OrderSoft" /></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container wide">
+      <Feature title="Keep Floors Moving & Drive Higher Spend" paras={['Long queues and delayed table visits lead to walkouts and missed drinks rounds. OrderSoft’s fast order-entry tools equip staff to bust queues across busy dining rooms, beer gardens, terraces, and event spaces.', 'Orders fire instantly to preparation stations, straight to kitchen video systems or bar receipt printers, cutting travel time for staff and eliminating manual order transcription. By keeping your team on the floor rather than behind a static counter till, OrderSoft increases guest interaction, speeds up table turnarounds, and maximizes revenue during your busiest shifts.']} image="ordersoft-busy-restaurant.png" alt="A busy restaurant" />
+      <Feature flip title="Centralised Menu & EPoS Sync" paras={['Say goodbye to double data entry and inconsistent pricing. OrderSoft and QR Ordering both sync directly with CES Touch, ensuring that your handheld terminals, QR table menus, and fixed counter tills always remain in perfect harmony.']} bullets={[
+        '**Real-Time Menu Updates:** Update item prices, daily specials, or modifier pop-ups in CES Touch, and changes reflect instantly on every handheld and QR menu.',
+        "**Live 86'ing & Stock Control:** Mark sold-out items at the main till to instantly disable them on handhelds and QR menus, preventing awkward order cancellations.",
+        '**Unified Reporting:** Every mobile and QR transaction feeds straight into your central till reporting, keeping end-of-day cashing up and sales reconciliations fast and accurate.',
+      ]} image="ordersoft-2-way-sync.png" alt="OrderSoft two-way sync with CES Touch" />
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container narrow store" data-reveal>
+      <h2>OrderSoft: available for <span class="serif">Android & iOS</span></h2>
+      <p>OrderSoft is designed to adapt to your venue’s preferred setup. Deploy it on dedicated Android all-in-one payment devices with integrated receipt printers, or run it across standard iPads and iPhones on the floor.</p>
+      <div class="badges"><Pic src="app_store.png" alt="Download on the App Store" width={540} sizes="180px" /><Pic src="google_play.png" alt="Get it on Google Play" width={540} sizes="180px" /></div>
+    </div>
+  </section>
+
+  <CTABand title="Streamline your service <span class='serif'>today</span>." />
+</Base>
+
+<style>
+  .note { text-align: center; margin: 48px auto 0; max-width: 56ch; }
+  .note strong { color: var(--ink); }
+  .pts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-block: 40px 56px; }
+  .pts li { padding: 28px; box-shadow: none; }
+  .pts h3 { margin-bottom: 10px; }
+  .pts p { margin: 0; }
+  .gal { margin-top: 24px; }
+  .store { text-align: center; }
+  .store h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
+  .store p { margin: 16px auto 28px; max-width: 58ch; }
+  .badges { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .badges :global(img) { width: 180px; height: auto; }
+  @media (max-width: 900px) { .pts { grid-template-columns: 1fr; } }
+</style>

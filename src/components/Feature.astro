@@ -1,0 +1,48 @@
+---
+import Pic from './Pic.astro';
+import Icon from './Icon.astro';
+type Props = {
+  title: string;
+  paras?: string[];
+  bullets?: string[];
+  image?: string;
+  alt?: string;
+  flip?: boolean;
+  eyebrow?: string;
+  width?: number;
+  frame?: boolean;
+};
+const { title, paras = [], bullets = [], image, alt = '', flip = false, eyebrow, width = 534, frame = true } = Astro.props;
+const md = (t: string) => t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+---
+<article class:list={['feature', { flip }]}>
+  <div class="txt">
+    {eyebrow && <p class="eyebrow" data-reveal="fade">{eyebrow}</p>}
+    <h3 class="ft" data-split set:html={title} />
+    {paras.map((p) => <p data-reveal set:html={md(p)} />)}
+    {bullets.length > 0 && (
+      <ul class="checks">
+        {bullets.map((b) => <li data-reveal><span class="tick"><Icon name="check" size={14} /></span><span set:html={md(b)} /></li>)}
+      </ul>
+    )}
+    <slot />
+  </div>
+  {image && (
+    <div class:list={['vis', { frame }]} data-reveal="scale">
+      <Pic src={image} alt={alt} width={width} sizes="(max-width: 900px) 100vw, 560px" />
+    </div>
+  )}
+</article>
+<style>
+  .feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; padding-block: clamp(36px, 5vw, 72px); }
+  .feature.flip .vis { order: -1; }
+  .ft { font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -.035em; margin-bottom: 18px; line-height: 1.08; }
+  .txt p { font-size: 1.08rem; max-width: 56ch; }
+  .vis.frame { border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-float); border: 1px solid var(--line); background: #fff; }
+  .vis :global(img) { width: 100%; height: auto; }
+  .checks { display: grid; gap: 14px; margin-top: 8px; }
+  .checks li { display: flex; gap: 14px; align-items: flex-start; max-width: 56ch; }
+  .tick { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; margin-top: 3px; }
+  .checks :global(strong) { color: var(--ink); font-weight: 600; }
+  @media (max-width: 900px) { .feature { grid-template-columns: 1fr; } .feature.flip .vis { order: 0; } }
+</style>

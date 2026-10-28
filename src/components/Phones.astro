@@ -1,0 +1,42 @@
+---
+import Pic from './Pic.astro';
+import Icon from './Icon.astro';
+type Props = { images: string[]; label: string; ratio?: string };
+const { images, label, ratio = '1080 / 2220' } = Astro.props;
+---
+<div class="phones" data-rail>
+  <div class="bar">
+    <p class="hint">Drag or use the arrows</p>
+    <div class="arrows">
+      <button type="button" class="ar" data-rail-prev aria-label={`Previous ${label}`}><Icon name="arrow" class="flip" size={20} /></button>
+      <button type="button" class="ar" data-rail-next aria-label={`Next ${label}`}><Icon name="arrow" size={20} /></button>
+    </div>
+  </div>
+  <div class="viewport" data-rail-viewport>
+    <ul class="track" data-rail-track>
+      {images.map((src, i) => (
+        <li>
+          <div class="phone" style={`aspect-ratio:${ratio}`}>
+            <Pic src={src} alt={`${label} screen ${i + 1}`} width={420} sizes="260px" />
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+<style>
+  .bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .hint { margin: 0; font-family: var(--font-mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+  .arrows { display: flex; gap: 10px; }
+  .ar { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-card); transition: .3s; color: var(--ink); }
+  .ar:hover:not([disabled]) { background: var(--ink); color: #fff; }
+  .ar[disabled] { opacity: .35; cursor: default; }
+  .ar :global(.flip) { transform: scaleX(-1); }
+  .viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px 4px 40px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+  .viewport::-webkit-scrollbar { display: none; }
+  :global(.is-drag) .viewport { overflow: hidden; }
+  .track { display: flex; gap: 22px; width: max-content; }
+  .track li { flex: none; width: clamp(200px, 20vw, 250px); scroll-snap-align: start; }
+  .phone { border-radius: 30px; padding: 7px; background: var(--ink); box-shadow: var(--shadow-float); overflow: hidden; }
+  .phone :global(img) { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; -webkit-user-drag: none; user-select: none; }
+</style>

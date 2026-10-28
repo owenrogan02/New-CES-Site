@@ -1,0 +1,86 @@
+[
+ {
+  "q": "Who is Clover?",
+  "a": "Clover, a Fiserv company, provides merchant services to small businesses. Clover has approx. 2 million devices in the field and Fiserv is a Fortune 500 entity. That said, Clover is proud to boast a global but local mentality and support merchants with a fantastic team of Business Consultants combined with UK support through its personal concierge service."
+ },
+ {
+  "q": "How much does it cost?",
+  "a": "Merchant account pricing is determined by Card Turnover and Average Transaction Value to ensure merchants receive the correct pricing structure. Merchants would expect to pay a % or a pence per transaction, but in some cases, this could be a % + pence per transaction. Either way, our Business Consultants will work with the merchant to understand the profile and put forward the correct pricing."
+ },
+ {
+  "q": "What is the cost of a Clover device?",
+  "a": "There are several considerations before the cost of device can be confirmed, for example, do you need a Countertop device or something Mobile and do you need WiFi and / or 4G. Will you need a single device to handle Ordering and Payment (rather than a Payment device and independent tablets). In the market you will see that devices cost from £15.00 per month to £26.00 per month depending on requirements."
+ },
+ {
+  "q": "I might be in a contract?",
+  "a": "It is always prudent to check the status of your contract and if there is a period left on the contract, Clover is happy to pay up to £1000.00 towards any cancellation fees you might incur for cancelling*"
+ },
+ {
+  "q": "Do you have any offers to merchants?",
+  "a": "Yes. Please speak with our Business Consultants regarding the latest offers but this could include £1 per month for 6 months on devices for example."
+ },
+ {
+  "q": "How long will it take to receive my funds?",
+  "a": "Funds are settled into your Bank Account on the next business day and Free of Charge"
+ },
+ {
+  "q": "Do you charge for PCI DSS?",
+  "a": "No. Whilst it is compulsory for all merchants to attest/complete the PCI DSS requirements via our Clover PCI DSS portal, there is no monthly charge for this."
+ },
+ {
+  "q": "How long does the application process take?",
+  "a": "Your application will be processed within a few days of submitting the completed documentation. In many cases, applications can be approved within minutes of onboarding."
+ },
+ {
+  "q": "Where is the Clover helpdesk based?",
+  "a": "Our call centre/helpdesk for Merchants is based at our UK HQ and merchants receive their own personal concierge service"
+ },
+ {
+  "q": "I am part of a trade association, so you won’t be able to beat my rates",
+  "a": "This is not usually true, and depending on the size of the client they may be on both a historical rate or simply poor pricing. We have negotiated preferential rates with Clover which many of our clients are now taking advantage of and so we would suggest having a discussion with one of the Business Consultants at Clover in this regard."
+ },
+ {
+  "q": "Do I need a Business Bank account?",
+  "a": "Yes, unless your business operates as a Sole Trader (whereby a personal account is fine) then a Business Bank Account will be required."
+ },
+ {
+  "q": "When will charges be debited from my bank account?",
+  "a": "At the end of each month, Clover will send a merchant statement detailing the breakdown of card payments processed for the prior month with charges payable. The Direct Debit will be processed approximately 14 days of the invoice date (specific date is detailed on the statement)"
+ },
+ {
+  "q": "I need to be able to take Chip and PIN payments, is this possible?",
+  "a": "Yes. Clover can arrange merchant accounts for Chip and Pin as well as eCommerce and phone order. Prices for Chip and Pin devices start from as little as £15.00 per month for the latest technology and which will allow you to take Visa, MasterCard, Amex, Diners including Contactless & NFC payments (Apple Pay and Google Pay)."
+ },
+ {
+  "q": "My signal / reception is not very good in the area; will this affect the Chip and PIN device?",
+  "a": "Believe it or not, Chip and PIN devices do not need the strongest signal and even GPRS is fine to process a card transaction, that said Clover can provide you with devices that are WiFi enabled and / or 4G supported."
+ },
+ {
+  "q": "Does the Clover device support SIM?",
+  "a": "Yes. Clover Flex supports 4G SIM as standard with a multi-SIM supplied. The SIM is enabled by activating via the “Wireless Manager” App on the device."
+ },
+ {
+  "q": "Can I view my transactions online?",
+  "a": "Yes, all merchants have access to a Clover Dashboard which provides 24/7 reporting."
+ },
+ {
+  "q": "I already have a merchant account with another provider (examples; DOJO, WorldPay, Barclaycard, Elavon, LloydsCardNetor AIBMS ).",
+  "a": "We understand this may be the case; however our experience has shown that due to the preferential deal we have negotiated with Clover, many of our clients are taking advantage of this and switching from their incumbent supplier. We would suggest having a discussion with one of our Business Consultants at Clover in this regard."
+ },
+ {
+  "q": "Can I take card payments over the phone?",
+  "a": "Yes, this is possible. Just let Clover know that this is what you would like to do"
+ },
+ {
+  "q": "Can I take eCommerce transactions?",
+  "a": "Yes, this is possible. Just let Clover know that this is what you would like to do"
+ },
+ {
+  "q": "Can I accept American Express and Discover (Diners) payments?",
+  "a": "Yes, this is possible. If you do not wish to accept these payment types, please confirm this to Clover and the entitlement will not be added."
+ },
+ {
+  "q": "Can I have debits taken from one bank account and credits into a different bank account?",
+  "a": "Yes. Please explain this requirement when you speak with Clover and the team will take the applicable bank account / sort code details"
+ }
+]

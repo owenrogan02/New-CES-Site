@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+
+type Props = {
+  src: string;
+  alt: string;
+  width?: number;
+  widths?: number[];
+  sizes?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  style?: string;
+};
+const { src, alt, width, widths, sizes, class: cls, loading = 'lazy', priority = false, style } = Astro.props;
+const meta = await img(src);
+const isSvg = src.endsWith('.svg');
+const maxW = Math.min(width ?? meta.width, meta.width);
+const w = widths ?? (isSvg ? undefined : [Math.round(maxW / 2), maxW, Math.min(meta.width, maxW * 2)].filter((v, i, a) => v > 0 && a.indexOf(v) === i));
+---
+<Image
+  src={meta}
+  alt={alt}
+  width={maxW}
+  widths={w}
+  sizes={sizes ?? (width ? `(max-width: ${width}px) 100vw, ${width}px` : '100vw')}
+  class={cls}
+  style={style}
+  loading={priority ? 'eager' : loading}
+  fetchpriority={priority ? 'high' : undefined}
+  decoding={priority ? 'sync' : 'async'}
+/>

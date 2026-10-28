@@ -1,0 +1,53 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@fontsource/instrument-serif/400-italic.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { url } from '../lib/url';
+
+type Props = { title: string; description?: string; isLogin?: boolean; bodyClass?: string; progress?: boolean };
+const { title, description = 'EPoS Software from CES Software. Market Leaders in EPoS Solutions for Retail and Hospitality. Contact our dedicated support team on 01992 564 645', isLogin = false, bodyClass = '', progress = false } = Astro.props;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={url('favicon.png')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      (function () {
+        var m = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var c = navigator.connection;
+        document.documentElement.classList.add(m ? 'motion-reduced' : 'motion-ok');
+        if (c && c.saveData) document.documentElement.classList.add('save-data');
+      })();
+    </script>
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header path={path} isLogin={isLogin} />
+    {progress && <div class="progress" data-progress aria-hidden="true"></div>}
+    <main id="main" data-main>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/motion/index';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 120; background: var(--grad-flow); transform-origin: 0 50%; transform: scaleX(0); }
+</style>

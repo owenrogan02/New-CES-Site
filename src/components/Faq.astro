@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+type Props = { items: { q: string; a: string }[] };
+const { items } = Astro.props;
+---
+<div class="faq">
+  {items.map((it) => (
+    <details data-reveal>
+      <summary><span>{it.q}</span><i><Icon name="plus" size={18} /></i></summary>
+      <div class="ans"><p>{it.a}</p></div>
+    </details>
+  ))}
+</div>
+<style>
+  .faq { max-width: 860px; margin-inline: auto; border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); interpolate-size: allow-keywords; }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 4px; font-weight: 550; font-size: 1.12rem; color: var(--ink); letter-spacing: -.015em; }
+  summary::-webkit-details-marker { display: none; }
+  summary i { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: transform .4s var(--ease-out), background .3s, color .3s; }
+  summary:hover i { background: var(--paper-3); }
+  details[open] summary i { transform: rotate(135deg); background: var(--ink); color: #fff; border-color: var(--ink); }
+  details::details-content { height: 0; overflow: clip; transition: height .45s var(--ease-out), content-visibility .45s allow-discrete; }
+  details[open]::details-content { height: auto; }
+  .ans { padding: 0 4px 24px; max-width: 70ch; }
+  .ans p { margin: 0; }
+</style>

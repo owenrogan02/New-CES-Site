@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import { url } from '../lib/url';
+---
+<Base title="Page not found | CES Software">
+  <section class="section nf">
+    <div class="container narrow c">
+      <p class="eyebrow">404</p>
+      <h1 class="display">That page <span class="serif grad-text">isn’t here</span>.</h1>
+      <p class="lede">The resource you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+      <div class="btn-row"><Button href={url('')} variant="primary" arrow>Back to home</Button><Button href={url('contact')} variant="secondary">Contact us</Button></div>
+    </div>
+  </section>
+</Base>
+<style>.nf { padding-top: calc(var(--header-h) + 100px); min-height: 80svh; } .c { text-align: center; } .c .eyebrow { justify-content: center; } .c .lede { margin: 20px auto 32px; } .c .btn-row { justify-content: center; }</style>

@@ -1,0 +1,17 @@
+---
+type Props = { eyebrow?: string; title: string; lede?: string; align?: 'left' | 'center'; as?: 'h1' | 'h2'; split?: boolean };
+const { eyebrow, title, lede, align = 'left', as: Tag = 'h2', split = true } = Astro.props;
+---
+<header class:list={['sh', align]}>
+  {eyebrow && <p class="eyebrow" data-reveal="fade">{eyebrow}</p>}
+  <Tag class="h2" data-split={split ? '' : undefined}><Fragment set:html={title} /></Tag>
+  {lede && <p class="lede" data-reveal>{lede}</p>}
+  <slot />
+</header>
+<style>
+  .sh { margin-bottom: clamp(36px, 5vw, 64px); max-width: 780px; }
+  .sh.center { margin-inline: auto; text-align: center; }
+  .sh.center .lede { margin-inline: auto; }
+  .sh .lede { margin-top: 20px; margin-bottom: 0; }
+  .center .eyebrow { justify-content: center; }
+</style>

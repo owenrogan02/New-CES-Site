@@ -1,0 +1,77 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Pic from '../../components/Pic.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ModuleGrid from '../../components/ModuleGrid.astro';
+import CTABand from '../../components/CTABand.astro';
+import Icon from '../../components/Icon.astro';
+import { industries } from '../../config/data';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return industries.map((i, n) => ({ params: { slug: i.slug }, props: { ind: i, prev: industries[(n + industries.length - 1) % industries.length], next: industries[(n + 1) % industries.length] } }));
+}
+const { ind, prev, next } = Astro.props;
+
+// Light polish: split the long legacy paragraph into readable chunks (text itself is unchanged).
+const sentences = ind.body.match(/[^.]+\.(?:\s|$)/g)?.map((s) => s.trim()) ?? [ind.body];
+const paras: string[] = [];
+for (let i = 0; i < sentences.length; i += 3) paras.push(sentences.slice(i, i + 3).join(' '));
+const [lead, ...rest] = paras;
+---
+<Base title={ind.title} progress>
+  <PageHero eyebrow="CES Touch for" title={ind.heading} compact />
+
+  <div class="container wide">
+    <figure class="banner" data-reveal="scale"><Pic src={ind.banner} alt={`${ind.name} banner`} width={1920} priority sizes="(max-width: 1440px) 100vw, 1360px" /></figure>
+  </div>
+
+  <section class="section tight">
+    <div class="container wide grid">
+      <div class="lead">
+        <p class="eyebrow" data-reveal="fade">Built for {ind.name}</p>
+        <p class="big" data-reveal>{lead}</p>
+      </div>
+      <div class="rest prose">
+        {rest.map((p) => <p data-reveal>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container wide">
+      <SectionHead eyebrow="Modules" title={ind.modulesTitle} />
+      <ModuleGrid names={ind.modules} compact />
+      <div class="more" data-reveal><Button href={`${url('touch')}#modules`} variant="secondary" arrow>All available modules</Button></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container wide">
+      <nav class="pn" aria-label="More industries">
+        <a href={url(`industries/${prev.slug}`)} class="card lift"><small>Previous</small><b>{prev.name}</b></a>
+        <a href={url(`industries/${next.slug}`)} class="card lift r"><small>Next</small><b>{next.name} <Icon name="arrow" size={18} /></b></a>
+      </nav>
+    </div>
+  </section>
+
+  <CTABand />
+</Base>
+
+<style>
+  .banner { margin: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-float); aspect-ratio: 16 / 5; }
+  .banner :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 700px) { .banner { aspect-ratio: 16 / 9; border-radius: var(--radius-l); } }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 96px); }
+  .big { font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.45; color: var(--ink); letter-spacing: -.02em; }
+  .rest p { font-size: 1.05rem; }
+  .more { margin-top: 28px; }
+  .pn { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pn a { padding: 24px 28px; display: grid; gap: 4px; }
+  .pn small { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+  .pn b { color: var(--ink); font-size: 1.3rem; letter-spacing: -.02em; display: inline-flex; align-items: center; gap: 10px; }
+  .pn .r { text-align: right; } .pn .r b { justify-content: flex-end; }
+  @media (max-width: 800px) { .grid, .pn { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { Content } from '../content/legal/terms.md';
+---
+<Base title="Terms of Use for EPoS Systems - CES Software Ltd" description="If you wish to contact CES Software regarding this Website, the Terms of Use or the Privacy Policy please contact us by telephone on 01992 564 645" progress>
+  <PageHero eyebrow="Legal" title="Terms of Use" compact />
+  <section class="section tight"><div class="container narrow prose legal"><Content /></div></section>
+</Base>
+<style>.legal { padding-bottom: 40px; } .legal :global(strong) { color: var(--ink); }</style>

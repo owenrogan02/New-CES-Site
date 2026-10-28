@@ -10,6 +10,20 @@ Status: **all decisions made, build autonomously**. Written for the build sessio
 > - It is kept out of search engines (§8) so it never competes with or duplicates the real site.
 > - Nothing in it is functional beyond navigation. The **dealer login is a visual mock-up only** (§6).
 
+## Build status and deviations (2026-10-28)
+
+All phases were built; `npm run check && npm run build` pass, and a Playwright run over every route at 1440px and 390px reports no console errors, failed requests or horizontal overflow. Lighthouse (mobile, throttled): Home 97 performance / 100 accessibility, Touch 99 / 99, CLS 0. Home LCP is 2.3 s (plan target 2.0 s). Total JS on the home page is about 75 KB gzipped.
+
+Deviations from the plan:
+- **Sticky, not pinned.** The feature story uses CSS `position: sticky` plus ScrollTrigger to swap visuals (more robust than a GSAP pin); it is stacked cards under 900px.
+- **No DrawSVG.** The "4 easy steps" connector line is a scaled element scrubbed on scroll.
+- **Draggable rail** is used for the industries cards and the phone screenshot galleries (there are no testimonials to carousel).
+- **Hero headline** uses a CSS entrance (not SplitText) so the LCP text never waits on JavaScript; other headings use SplitText line reveals.
+- **YouTube** embeds are click-to-load (`youtube-nocookie.com`) so no third-party requests happen until played.
+- **`/styleguide/`** page was not built.
+- **No forms.** The legacy Edge sign-up and dealer enquiry forms became mailto/phone calls to action.
+- Astro 6.4.8 is used (Astro 7 requires Node 22.23.4+).
+
 ## 0. Decisions already made (do not re-open)
 
 | Topic | Decision |

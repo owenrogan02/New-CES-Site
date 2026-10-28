@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CTABand from '../components/CTABand.astro';
+import { site } from '../config/site';
+import { url } from '../lib/url';
+---
+<Base title="About Us - EPoS Software Installation from CES Software" description="About Us - EPoS Software Installation. CES Software is uniquely tailored to customer needs and designed to help your business grow. Contact us on 01992 564 645" progress>
+  <PageHero eyebrow="The company" title="Market leaders since <span class='serif grad-text'>1997</span>." lede="CES Software launched CES Touch in 1997. Since then it has steadily grown to become a market leader in the supply of affordable and simple to use point of sale applications." compact>
+    <Button href={url('touch')} variant="primary" arrow>Discover CES Touch</Button>
+    <Button href={url('contact')} variant="secondary">Contact us</Button>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container wide grid">
+      <div class="prose big">
+        <p data-reveal>CES Software launched <a href={url('touch')}>CES Touch</a> in 1997. Since then it has steadily grown to become a market leader in the supply of affordable and simple to use point of sale applications. During this time it has built up a worldwide customer base to cover a comprehensive variety of industries within the retail and hospitality sectors. These include pubs & clubs, hotels, restaurants, CTNs, amongst many others.</p>
+        <p data-reveal>With a <a href={url('dealers')}>network of dealers</a> worldwide, we continue to provide ongoing solutions and pioneering development to help our dealers with growth, regardless of the size. As we understand that no two businesses are alike and many have different needs, we believe the key to our success is the result of providing a service that is uniquely tailored to meet the needs of the dealer. To begin with, we want to know your needs and requirements as your business is unique compared to others. We like to stay in continuous contact to help you along the way to a successful outcome and to ensure all of your needs have been fulfilled.</p>
+      </div>
+      <aside class="card own" data-reveal>
+        <p class="eyebrow">Ownership</p>
+        <p>CES is owned by <a href={site.owner.href} target="_blank" rel="noopener noreferrer">{site.owner.name}</a>. 3R Telecom is a well-respected software and services company which focuses on the retail, mobile telecoms and digital services markets. It builds on established retail management software products, and uses its senior management team's experience of the retail, mobile telecoms and digital services industries to launch innovative new services into retail customers.</p>
+      </aside>
+    </div>
+  </section>
+
+  <CTABand title="Let’s <span class='serif'>talk</span>." />
+</Base>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .big p { font-size: 1.15rem; }
+  .own { padding: 32px; position: sticky; top: calc(var(--header-h) + 28px); }
+  .own p:last-child { margin: 0; }
+  .own a { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .own { position: static; } }
+</style>

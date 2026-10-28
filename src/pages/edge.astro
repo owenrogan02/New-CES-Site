@@ -1,0 +1,173 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Feature from '../components/Feature.astro';
+import Marquee from '../components/Marquee.astro';
+import SectionHead from '../components/SectionHead.astro';
+import YouTube from '../components/YouTube.astro';
+import Faq from '../components/Faq.astro';
+import Phones from '../components/Phones.astro';
+import Icon from '../components/Icon.astro';
+import Pic from '../components/Pic.astro';
+import { cloverClients } from '../config/data';
+import { site } from '../config/site';
+import faq from '../config/edge-faq.json';
+
+const payments = [['Visa', 'visa.svg'], ['Mastercard', 'mastercard.svg'], ['American Express', 'american_express.svg'], ['Samsung Pay', 'samsung-pay.svg'], ['Apple Pay', 'apple_pay.svg'], ['Google Pay', 'gpay.svg']];
+const devices = [
+  { name: 'Clover Flex', img: 'clover-flex.png', price: 'From £15/month', pts: ['5.99” touchscreen, built-in printer, barcode scanner, and camera', 'Accepts all major payments: chip, contactless, Apple Pay®, Google Pay®, Samsung Pay', '4G/LTE + Wi-Fi for total mobility', 'PIN-on-glass and wireless charging', 'Ideal for on-the-go, tableside, or curbside service', '8-core processor and all-day battery life'] },
+  { name: 'Clover Mini', img: 'clover-mini.png', price: 'From £20/month', pts: ['8” HD display with a small footprint', 'Built-in printer and contactless payment support', 'Customisable via the Clover App Market', 'Manage sales, inventory, staff, and reporting from one sleek device', 'Perfect for retail counters, showrooms, and service desks'] },
+  { name: 'Clover Pocket', img: 'clover-pocket.png', price: 'From £15/month', pts: ['Lightweight and mobile for pop-ups, events, or queue-busting', 'Accepts all major payment types', 'Seamlessly integrates with your Clover ecosystem', 'Designed for speed, simplicity, and flexibility'] },
+];
+---
+<Base title="CES Edge | CES Software" progress>
+  <PageHero eyebrow="CES Edge × Clover" title="Empowering your business with <span class='serif grad-text'>smarter payments</span>" lede="Cut costs. Save time. CES Edge gives you a powerful POS system right in your hand - completely FREE. Just pay for your Clover terminal and payment processing, and CES Edge comes at no extra cost.">
+    <Button href="#get-started" variant="primary" arrow>Get started</Button>
+    <Button href="#devices" variant="secondary">See the devices</Button>
+    <div slot="visual" class="edgevis">
+      <div class="photo"><Pic src="environmental-flex-pocket.png" alt="Taking a card payment with a Clover device" width={800} sizes="(max-width: 900px) 100vw, 460px" priority /></div>
+      <div class="logochip"><Pic src="ces_edge_x_clover.svg" alt="CES Edge and Clover" width={420} sizes="260px" /></div>
+    </div>
+  </PageHero>
+
+  <section class="section tight">
+    <div class="container wide trio">
+      <article class="card spot" data-reveal><h3>Lightweight design</h3><p>Take payments anytime, anywhere with a POS system that fits in your back pocket. Run and manage your business from the palm of your hand with CES Edge</p></article>
+      <article class="card spot" data-reveal><h3>Powerful portability</h3><p>Fire orders to kitchen with CES Edge, sales on the retail floor, or send receipts for services by email.</p></article>
+      <article class="card spot" data-reveal><h3>Compatible</h3><p>Sync seamlessly with other CES Edge and Clover devices, making it easy to add to any existing Clover POS system</p></article>
+    </div>
+  </section>
+
+  <section class="section alt tight">
+    <div class="container wide vgrid">
+      <div>
+        <p class="eyebrow" data-reveal="fade">Watch</p>
+        <h2 data-split>CES Edge + Clover: set up in minutes, <span class="serif">get paid faster</span></h2>
+        <p class="lede" data-reveal>Payments made simple.</p>
+      </div>
+      <div data-reveal="scale"><YouTube id="kE56GNswdtQ" title="CES Edge + Clover: Set Up in Minutes, Get Paid Faster | Payments Made Simple" poster="clover-case-study-1.jpg" posterAlt="Clover in use" /></div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container wide">
+      <Feature title="Elevate Your Hospitality Game with CES Edge + Clover Powerhouse" paras={[
+        'Experience the perfect blend of power and portability with CES Edge paired with your Clover Flex or Pocket. Built for fast-paced environments, this all-in-one solution lets your staff take orders tableside and process payments instantly on the same device — eliminating unnecessary trips to a central till and increasing customer flow and increased orders and efficiency.',
+        'Whether you run a coffee shop, mobile catering business, work on-site as a tradesperson, manage a hair salon, boutique, or flower shop, CES Edge helps you track sales, issue receipts, and stay in control — all at no extra cost.',
+        '**Work smarter. Move faster. Start saving today.**',
+      ]} />
+      <div class="pgal"><Phones images={['clover-ped-images/1.png', 'clover-ped-images/2.png', 'clover-ped-images/3.png', 'clover-ped-images/4.png']} label="CES Edge" ratio="287 / 664" /></div>
+      <div class="pay" data-reveal>
+        <h3>Accept the most popular payment methods</h3>
+        <ul>{payments.map(([n, f]) => <li><Pic src={`payment_logos/${f}`} alt={n} width={120} sizes="90px" /></li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="devices">
+    <div class="container wide">
+      <SectionHead eyebrow="What's on offer?" title="Pick the Clover device that <span class='serif'>fits</span>." />
+      <div class="devs">
+        {devices.map((d) => (
+          <article class="card spot lift dev" data-reveal>
+            <div class="dimg"><Pic src={d.img} alt={d.name} width={600} sizes="(max-width: 900px) 100vw, 380px" /></div>
+            <h3>{d.name}</h3>
+            <ul>{d.pts.map((p) => <li><Icon name="check" size={16} />{p}</li>)}</ul>
+            <p class="price">{d.price}</p>
+            <Button href="#get-started" variant="secondary" size="sm" arrow>Find out more</Button>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container wide">
+      <Feature title="Seamless Order & Payment Management" paras={['Eliminate the gap between the kitchen and the customer with a unified system that handles everything from the first order to the final receipt. By integrating CES Edge with Clover Flex and Pocket, your staff can manage orders and process Chip & Pin, NFC, and mobile wallet payments directly at the table or counter. This all-in-one approach removes the need for multiple devices, allowing you to fire orders instantly and provide customers with the choice of printed, SMS, or emailed receipts- all from a single, durable handheld device.']} image="clover-seamless-order.png" alt="Seamless order and payment management" />
+      <Feature flip title="24/7 Real-Time Business Insights" paras={['Take the guesswork out of your operations with a suite of powerful reporting tools designed to keep you in total control, no matter where you are in the world. Our platform offers global access to live performance data, allowing you to perform instant transaction lookups, monitor staff activity, and review deep analytical insights across laptops, tablets, or mobiles. With 24/7 real-time reporting, you have the visibility needed to make informed decisions on the fly and manage your team’s efficiency with absolute precision.']} image="clover-reporting.png" alt="Real-time reporting" />
+      <Feature title="Built for Speed and Maximum Efficiency" paras={['Keep pace with your busiest shifts using industry-leading hardware and settlement processes designed for rapid turnover. Our Clover devices are powered by a wicked-fast, 8-core Snapdragon processor, ensuring that software never lags when the pressure is on. This technical speed is matched by our financial efficiency; we offer faster funding to get your money into your account by the next day, alongside 4G and WiFi support that ensures you never miss a sale due to a dropped connection.']} image="clover-speed-efficiency.png" alt="Built for speed and efficiency" />
+      <Feature flip title="World-Class Security and Dedicated Support" paras={['Scale your business with the peace of mind that comes from a world leader in payments We take the headache out of compliance with a dedicated PCI DSS portal featuring auto-approval for Clover devices, while our expert risk and fraud management tools actively work to lessen your chargeback risks. Whenever you need a human touch, you have direct access to a UK-based call centre and a dedicated Account Manager, ensuring you receive personal, expert support exactly when it matters most.']} image="clover-support.png" alt="Security and dedicated support" />
+    </div>
+  </section>
+
+  <section class="section ink" id="get-started">
+    <div class="container narrow gs">
+      <p class="eyebrow" data-reveal="fade">Get started</p>
+      <h2 data-split>Take your first steps and be up and running <span class="serif">before you know it.</span></h2>
+      <ul class="pillrow" data-reveal><li>Fast approval</li><li>Simple setup</li><li>Local dealer support</li></ul>
+      <div class="btn-row" data-reveal>
+        <Button href={`mailto:${site.salesEmail}?subject=CES%20Edge%20enquiry`} variant="primary" icon="mail" arrow>{site.salesEmail}</Button>
+        <Button href={site.phoneHref} variant="ghost" icon="phone">{site.phone}</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container wide case">
+      <div data-reveal>
+        <p class="eyebrow">Case study</p>
+        <h2 class="h3big">In July 2024, Clover partnered with Hibernian F.C. to enhance the match day experience at Easter Road stadium by deploying 120 Clover devices.</h2>
+        <p><strong>Key benefits provided:</strong></p>
+        <ul class="bul"><li><strong>Quick and Efficient Transactions:</strong> Faster payments and shorter queues.</li><li><strong>Enhanced Fan Experience:</strong> Real-time transaction updates and streamlined operations.</li></ul>
+        <blockquote>“We’re really excited to be working with Clover for the next four years... their product will greatly improve the fan experience around the ground at Easter Road.”<cite><strong>Murray Milligen</strong>, Commercial Director, Hibernian F.C</cite></blockquote>
+      </div>
+      <div class="cimg" data-reveal="scale"><Pic src="clover-case-study-1.jpg" alt="Clover at Hibernian F.C." width={1200} sizes="(max-width: 900px) 100vw, 560px" /></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container wide">
+      <SectionHead align="center" eyebrow="FAQ" title="Frequently Asked <span class='serif'>Questions</span>" />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container wide">
+      <h2 class="mini" data-reveal="fade">A handful of our Clover clients</h2>
+    </div>
+    <Marquee items={cloverClients} folder="" label="Clover clients" height={64} />
+  </section>
+</Base>
+
+<style>
+  .edgevis { position: relative; max-width: 460px; margin-inline: auto; }
+  .photo { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-float); aspect-ratio: 4 / 4.4; background: #fff; }
+  .photo :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .logochip { position: absolute; left: -8%; bottom: 8%; background: #fff; padding: 14px 18px; border-radius: 16px; box-shadow: var(--shadow-float); border: 1px solid var(--line); width: 62%; }
+  .logochip :global(img) { width: 100%; height: auto; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .trio article { padding: 28px; }
+  .trio h3 { margin-bottom: 10px; } .trio p { margin: 0; }
+  .vgrid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+  .vgrid h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+  .pgal { margin-top: 24px; }
+  .pay { text-align: center; margin-top: 36px; }
+  .pay h3 { margin-bottom: 22px; }
+  .pay ul { display: flex; gap: clamp(20px, 4vw, 48px); justify-content: center; flex-wrap: wrap; align-items: center; }
+  .pay :global(img) { height: 34px; width: auto; max-width: 110px; }
+  .devs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dev { padding: 28px; display: flex; flex-direction: column; }
+  .dimg { aspect-ratio: 3 / 2; display: grid; place-items: center; background: var(--paper-2); border-radius: var(--radius-m); margin-bottom: 22px; overflow: hidden; }
+  .dimg :global(img) { max-height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+  .dev h3 { font-size: 1.5rem; margin-bottom: 14px; }
+  .dev ul { display: grid; gap: 9px; flex: 1; margin-bottom: 20px; }
+  .dev li { display: flex; gap: 10px; align-items: flex-start; font-size: .96rem; }
+  .dev li :global(svg) { color: var(--c-green); flex: none; margin-top: 4px; }
+  .price { font-size: 1.4rem; font-weight: 650; color: var(--ink); letter-spacing: -.03em; margin-bottom: 14px; }
+  .gs { text-align: center; }
+  .gs h2 { max-width: 18ch; margin: 0 auto; font-size: clamp(2rem, 4.4vw, 3.4rem); }
+  .pillrow { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 30px 0; }
+  .pillrow li { padding: 8px 18px; border-radius: 999px; border: 1px solid oklch(100% 0 0 / .22); color: #fff; font-weight: 500; }
+  .gs .btn-row { justify-content: center; }
+  .case { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+  .h3big { font-size: clamp(1.4rem, 2.4vw, 2rem); letter-spacing: -.03em; line-height: 1.2; margin-bottom: 20px; }
+  .bul { list-style: disc; padding-left: 1.2em; display: grid; gap: 8px; margin-bottom: 20px; }
+  blockquote { margin: 24px 0 0; padding: 22px 26px; border-left: 3px solid var(--c-red); background: var(--paper-2); border-radius: 0 var(--radius-m) var(--radius-m) 0; color: var(--ink); font-size: 1.1rem; }
+  cite { display: block; margin-top: 12px; font-style: normal; font-size: .95rem; color: var(--ink-3); }
+  .cimg { border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-float); }
+  .cimg :global(img) { width: 100%; height: auto; }
+  .mini { font-family: var(--font-mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; color: var(--ink-3); text-align: center; margin-bottom: 36px; }
+  @media (max-width: 900px) { .trio, .devs, .vgrid, .case { grid-template-columns: 1fr; } .logochip { left: 4%; } }
+</style>

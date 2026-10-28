@@ -1,0 +1,23 @@
+---
+import Pic from './Pic.astro';
+import { modules, moduleIcon } from '../config/data';
+type Props = { names?: string[]; compact?: boolean };
+const { names, compact = false } = Astro.props;
+const list = names ? names.map((n) => ({ name: n, icon: moduleIcon(n) })) : modules.map((m) => ({ name: m.name, icon: m.icon }));
+---
+<ul class:list={['mods', { compact }]}>
+  {list.map((m) => (
+    <li class="card spot" data-reveal>
+      <Pic src={m.icon} alt="" width={64} sizes="56px" />
+      <span>{m.name}</span>
+    </li>
+  ))}
+</ul>
+<style>
+  .mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+  .compact { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+  li { display: flex; align-items: center; gap: 14px; padding: 14px 18px 14px 14px; border-radius: var(--radius-m); box-shadow: none; }
+  li :global(img) { width: 44px; height: 44px; flex: none; transition: transform .5s var(--ease-out); }
+  li:hover :global(img) { transform: rotate(-8deg) scale(1.1); }
+  span { font-weight: 550; color: var(--ink); letter-spacing: -.01em; line-height: 1.25; }
+</style>

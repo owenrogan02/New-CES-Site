@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { url } from '../lib/url';
+type Props = { shared?: boolean; class?: string; full?: boolean };
+const { shared = true, class: cls = '', full = false } = Astro.props;
+---
+<a
+  class={`btn ghost sm dealer-login ${full ? 'full' : ''} ${cls}`}
+  href={url('dealer-login')}
+  style={shared ? 'view-transition-name: dealer-login' : undefined}
+>
+  <Icon name="lock" size={16} />
+  Dealer Login
+</a>
+<style>
+  .full { width: 100%; --h: 52px; font-size: 1rem; }
+</style>

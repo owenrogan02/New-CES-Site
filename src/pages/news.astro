@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Pic from '../components/Pic.astro';
+import CTABand from '../components/CTABand.astro';
+import { news, newsIntro } from '../config/news';
+
+const md = (t: string) => t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+---
+<Base title="News & Updates | CES Software" progress>
+  <PageHero eyebrow="Touch Version 11" title="CES news & <span class='serif grad-text'>updates</span>!" lede={newsIntro} compact />
+
+  <section class="section tight">
+    <div class="container wide layout">
+      <aside class="toc" aria-label="On this page">
+        <p class="eyebrow">In this release</p>
+        <ol>{news.map((n) => <li><a href={`#${n.id}`}>{n.title}</a></li>)}</ol>
+      </aside>
+      <div class="items">
+        {news.map((n) => (
+          <article id={n.id} class="item" data-reveal>
+            <h2 class="ih">{n.title}</h2>
+            <div class="prose">
+              {n.paras?.map((p) => <p set:html={md(p)} />)}
+              {n.bullets && <ul>{n.bullets.map((b) => <li set:html={md(b)} />)}</ul>}
+            </div>
+            {n.images && (
+              <div class:list={['shots', { phones: n.id === 'ordersoft' }]}>
+                {n.images.map((src) => <figure class="shot"><Pic src={src} alt={n.title} width={n.id === 'ordersoft' ? 360 : 900} sizes={n.id === 'ordersoft' ? '200px' : '(max-width: 900px) 100vw, 700px'} /></figure>)}
+              </div>
+            )}
+            {n.after?.map((a) => (
+              <div class="after">
+                {a.paras?.map((p) => <p>{p}</p>)}
+                {a.images && <div class="shots">{a.images.map((src) => <figure class="shot"><Pic src={src} alt={n.title} width={900} sizes="(max-width: 900px) 100vw, 700px" /></figure>)}</div>}
+              </div>
+            ))}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTABand title="Upgrade to Touch <span class='serif'>version 11</span>." body="Talk to our team or your CES dealer about moving to the latest version." />
+</Base>
+
+<style>
+  .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .toc { position: sticky; top: calc(var(--header-h) + 28px); max-height: calc(100svh - var(--header-h) - 56px); overflow: auto; }
+  .toc ol { display: grid; gap: 2px; border-left: 1px solid var(--line); }
+  .toc a { display: block; padding: 6px 0 6px 16px; color: var(--ink-3); font-size: .93rem; margin-left: -1px; border-left: 2px solid transparent; transition: .25s; }
+  .toc a:hover { color: var(--ink); border-left-color: var(--c-red); }
+  .items { display: grid; gap: 0; max-width: 800px; }
+  .item { padding-block: clamp(28px, 4vw, 48px); border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--header-h) + 24px); }
+  .item:first-child { padding-top: 0; }
+  .ih { font-size: clamp(1.5rem, 2.6vw, 2.1rem); letter-spacing: -.03em; margin-bottom: 14px; }
+  .prose p, .prose li { font-size: 1.05rem; }
+  .prose ul { margin-top: 6px; }
+  .prose :global(strong) { color: var(--ink); }
+  .shots { display: grid; gap: 16px; margin-top: 22px; }
+  .shots.phones { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .shot { margin: 0; border-radius: var(--radius-m); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-card); background: #fff; }
+  .shot :global(img) { width: 100%; height: auto; }
+  .after { margin-top: 22px; }
+  @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } .toc { position: static; max-height: none; } .toc ol { grid-template-columns: 1fr 1fr; column-gap: 20px; } }
+  @media (max-width: 560px) { .toc ol { grid-template-columns: 1fr; } }
+</style>

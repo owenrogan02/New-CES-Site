@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+type Props = {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'brand' | 'glow';
+  size?: 'md' | 'sm';
+  arrow?: boolean;
+  icon?: string;
+  external?: boolean;
+  magnetic?: boolean;
+  class?: string;
+};
+const { href, variant = 'primary', size = 'md', arrow = false, icon, external = false, magnetic = true, class: cls = '' } = Astro.props;
+const ext = external || /^https?:/.test(href);
+---
+<a
+  class={`btn ${variant} ${size === 'sm' ? 'sm' : ''} ${cls}`}
+  href={href}
+  data-magnetic={magnetic ? '' : undefined}
+  target={ext ? '_blank' : undefined}
+  rel={ext ? 'noopener noreferrer' : undefined}
+>
+  {icon && <Icon name={icon} size={17} />}
+  <slot />
+  {arrow && <Icon name={ext ? 'arrow-up-right' : 'arrow'} class="arrow" size={18} />}
+</a>
