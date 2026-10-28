@@ -1,6 +1,6 @@
 # CES Software: website redesign concept plan
 
-Status: **approved direction, ready to build**. Written for the build session (Sonnet) to execute phase by phase.
+Status: **all decisions made, build autonomously**. Written for the build session to execute every phase end to end **without stopping for further decisions** (see §0 and §12). The only valid reason to stop is if cessoftware.com can't be reached (§1).
 
 > ## ⚠️ This is a concept, not the live website
 > This project is a **standalone design concept** of what a redesigned cessoftware.com *could* look like, built to be **shown to CES Software as an idea**.
@@ -22,10 +22,17 @@ Status: **approved direction, ready to build**. Written for the build session (S
 | Content | **All existing content from cessoftware.com is kept** but may be restructured, merged and re-ordered |
 | Forms | None. Contact = `mailto:` / `tel:` links using the real CES details |
 | Dealer login | **Complete placeholder.** Shows *where* it lives in the new front end and what it would look like. No integration, no link to the real portal, never submits anything (§6) |
+| Brand colour | **Use CES's existing primary brand colour** as `--brand` and build the gradient palette around it (§4.1) |
+| Sitemap gate | **No pause.** Build the session's own best mapping using the §3 rules, and record it in `docs/content-inventory.md` for review afterwards |
+| Copy | **Light polish**: body copy stays verbatim; headlines, eyebrows and button labels may be tightened, and long paragraphs split. No new claims or facts. Log every change in `docs/copy-changes.md` (original → new) |
+| Missing content | **Omit** any section (testimonials, logos, stats, dealer map, etc.) that has no real content. No placeholders, no dummy content |
+| Weak or missing imagery | Use **styled UI illustrations** (generic interface vignettes such as charts, tables and cards in the brand palette, SVG/HTML) inside device frames where real screenshots are missing or low quality. They must not imitate or claim to be CES's actual product screens. Real images are used wherever they are good enough |
+| Concept footer note | **Removed.** No "design concept" note on the site (`noindex` safeguards stay) |
+| Publishing | When everything passes §8–§9, **merge to `main` and push** to deploy (§10) |
 
 ## 1. Content source: capture first
 
-The planning session could not reach cessoftware.com (network policy), so **no copy, images or sitemap have been captured yet**. The information architecture in §3 is therefore *provisional*. Phase 0 captures the real content, and the build session must confirm the final sitemap with the user before building pages.
+The planning session could not reach cessoftware.com (network policy), so **no copy, images or sitemap have been captured yet**. The information architecture in §3 is therefore *provisional*. Phase 0 captures the real content, and the build session then decides the final sitemap itself (no confirmation pause).
 
 > If `curl -sSI https://cessoftware.com/` fails from the build session too, stop and ask the user to add `cessoftware.com` and `www.cessoftware.com` to the environment's allowed domains. Do **not** invent placeholder marketing copy and present it as real content.
 
@@ -47,7 +54,7 @@ The crawl is **read-only**: only `GET` requests, at a polite rate (≤ 2 request
    - contact details (phone, email, address, hours), social links, legal pages
    - product names, pricing (if any), downloads, support or knowledge-base links
 3. Add `capture/` to `.gitignore` (raw dumps and screenshots). Commit the inventory and **only** the assets that will be used (they move to `src/assets/` in Phase 3).
-4. **Gate:** produce a mapping table `current page → concept page/section` (§3) and ask the user to confirm it before Phase 3. Every inventoried piece of content must appear in the table: nothing is silently dropped.
+4. Produce a mapping table `current page → concept page/section` (§3) at the top of `docs/content-inventory.md`, then **carry straight on** (no confirmation pause). Every inventoried piece of content must appear in the table: nothing is silently dropped.
 
 ### Phase 1: Project scaffold and deploy pipeline
 - `npm create astro@latest` (minimal template, TypeScript strict). Pin exact versions in `package.json`, use the current stable releases, and commit `package-lock.json`.
@@ -62,7 +69,7 @@ The crawl is **read-only**: only `GET` requests, at a polite rate (≤ 2 request
 Tokens, typography, layout primitives, header (including the Dealer Login button), footer, mobile menu, motion utilities and the WebGL gradient. Detailed in §4–§6. Build a hidden `/styleguide/` page showing every token and component, and use it for review.
 
 ### Phase 3: Pages
-Build the pages in the confirmed IA order (Home first, then the dealer-login placeholder), using the section components in §5. Move the captured assets into `src/assets/` and render them through `astro:assets` `<Image>`/`<Picture>`.
+Build the pages in the mapped IA order (Home first, then the dealer-login placeholder), using the section components in §5. Move the captured assets into `src/assets/` and render them through `astro:assets` `<Image>`/`<Picture>`.
 
 ### Phase 4: Motion pass
 Wire up the animations in §5 section by section, then do the reduced-motion and touch fallbacks, then performance tuning.
@@ -70,7 +77,7 @@ Wire up the animations in §5 section by section, then do the reduced-motion and
 ### Phase 5: QA and publish the concept
 Run the checks in §8–§9, then publish to GitHub Pages (§10).
 
-## 3. Information architecture (provisional, confirm after Phase 0)
+## 3. Information architecture (provisional, finalised by the build session after Phase 0)
 
 CES Software sells (at least partly) **through dealers**. The likely structure is below. Adjust it to the real content, preferring **fewer, richer pages** over many thin ones.
 
@@ -90,7 +97,7 @@ CES Software sells (at least partly) **through dealers**. The likely structure i
 
 Restructuring rules:
 - Merge pages under ~150 words into the most relevant richer page.
-- Keep the current copy verbatim by default. Only trim obvious duplication, and flag every copy edit in the PR description for the user to approve.
+- Copy follows the **light polish** rule (§0): body copy verbatim; headlines, eyebrows and button labels may be tightened; every change is logged in `docs/copy-changes.md`.
 - Navigation: at most 5 top-level items, plus **Dealer Login** as a secondary (ghost) button and the primary CTA ("Contact us" or the current primary CTA) on the right.
 - Products with several pages use a mega-menu dropdown (product name, one-line description, icon).
 - No redirects are needed: this concept doesn't replace any live URLs.
@@ -98,7 +105,7 @@ Restructuring rules:
 ## 4. Design system
 
 ### 4.1 Colour (OKLCH custom properties in `src/styles/tokens.css`)
-Derive the accent from the **current CES brand primary** captured in Phase 0. The defaults below are placeholders, used only if the brand colour clashes or is absent:
+Use the **current CES brand primary** captured in Phase 0 as `--brand` (decided). Build `--grad-2..4` as harmonious hues around it (analogous + one warm accent), and derive `--brand-ink` for text contrast. The values below are fallbacks, used only if no brand colour can be found:
 
 ```css
 :root {
@@ -175,7 +182,7 @@ Use **native cross-document View Transitions** (`@view-transition { navigation: 
 | 7 | **Dealer network** | Current dealer content (if any) | Dotted SVG map with pulsing dealer-region points; CTAs to `/dealers/` and the Dealer Login placeholder |
 | 8 | **Testimonials** | Current quotes (verbatim; omit the section if none) | Draggable carousel (Draggable + Inertia, snap to card), keyboard arrows, autoplay off |
 | 9 | **CTA band** | Current contact CTA | Large split headline; button with an animated conic-gradient border; magnetic |
-| 10 | **Footer** | Nav, contact, legal, social, dealer links, concept note (§8) | Oversized "CES" wordmark that rises/clips in as the footer enters; link hover underline grows |
+| 10 | **Footer** | Nav, contact, legal, social, dealer links | Oversized "CES" wordmark that rises/clips in as the footer enters; link hover underline grows |
 
 Global chrome:
 - **Header:** transparent over the hero, then switches to a frosted backdrop (`backdrop-filter: blur(14px) saturate(1.4)`, hairline border) after 24px of scroll. It hides when scrolling down and reappears when scrolling up. The active nav link has a sliding pill indicator.
@@ -258,7 +265,7 @@ Copy lives in `src/content/` and `site.ts`, not hard-coded across components, so
 - `<meta name="robots" content="noindex, nofollow">` on **every** page, and `public/robots.txt` with `User-agent: * / Disallow: /`. The concept must never appear in search results or compete with the real cessoftware.com.
 - No sitemap, no canonical tags pointing at cessoftware.com, and no analytics or tracking.
 - Page titles keep the current site's titles. Meta descriptions are kept so the demo looks complete.
-- Footer note in small muted text: *"Design concept for CES Software. Not the official website."* (wording in `site.ts`; confirm with the user, §12)
+- **No** "design concept" footer note (decided).
 - Custom `404.astro` that respects the base path.
 
 ## 9. Verification workflow for the build session
@@ -272,7 +279,7 @@ Copy lives in `src/content/` and `site.ts`, not hard-coded across components, so
 
 ## 10. Publishing the concept
 
-1. Merge to `main`, which makes the workflow deploy. In repo **Settings → Pages**, set Source to **GitHub Actions**. Leave **Custom domain empty**.
+1. When §8–§9 pass, the build session **merges to `main` and pushes** (decided), which makes the workflow deploy. The user sets repo **Settings → Pages → Source → GitHub Actions** once (the session can't change repo settings; if the first deploy fails for that reason, say so). Leave **Custom domain empty**.
 2. The concept is then live at **`https://owenrogan02.github.io/New-CES-Site/`**. Share this link with CES.
 3. Note: a GitHub Pages site is publicly reachable by anyone with the link (even from a private repo on paid plans). The noindex safeguards in §8 keep it out of search engines. If it should be fully private, unpublish Pages after the demo, or share a screen recording instead.
 4. **Do not change any DNS records or anything about the real cessoftware.com.** If CES later adopts the design, going live becomes a separate project (custom domain, redirects, SEO, real dealer portal), and it is out of scope here.
@@ -280,8 +287,11 @@ Copy lives in `src/content/` and `site.ts`, not hard-coded across components, so
 ## 11. Out of scope
 Making this the live website, custom domain or DNS work, working dealer authentication or any link to the real dealer portal, forms or back-end, CMS integration, blog creation (unless the current site has a blog, which is then migrated as a content collection), analytics, dark mode, and multi-language.
 
-## 12. Open items to confirm with the user during the build
-1. The final sitemap mapping table (Phase 0 gate).
-2. Any copy edits beyond verbatim carry-over.
-3. Brand colour: keep the current CES primary as `--brand`, or adopt the refreshed placeholder palette.
-4. Wording (or removal) of the footer "Design concept" note.
+## 12. Decisions log (all resolved, do not ask again)
+1. Sitemap mapping: decided by the build session, recorded in `docs/content-inventory.md`.
+2. Copy edits: light polish, logged in `docs/copy-changes.md`.
+3. Brand colour: CES's existing primary.
+4. Footer concept note: removed.
+5. Missing testimonials, logos or stats: section omitted.
+6. Weak or missing product imagery: styled UI illustrations.
+7. Publishing: merge to `main` and deploy when QA passes.
